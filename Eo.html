@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BloodStrike EO System</title>
+    <style>
+        :root {
+            --primary-red: #e63946;
+            --primary-blue: #1d3557;
+            --secondary-red: #ff686b;
+            --secondary-blue: #457b9d;
+            --light-bg: #f8f9fa;
+            --dark-text: #212529;
+            --light-text: #f8f9fa;
+            --accent: #ffd166;
+            --success: #06d6a0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --livemurmer-yellow: #e7fe2b;
+            --liveharting-gold: #d4b007;
+
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-size-adjust: none;
+            -webkit-text-size-adjust: none;
+            -moz-text-size-adjust: none;
+            -ms-text-size-adjust: none;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--primary-red), var(--primary-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .mode-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .mode-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mode-btn.active {
+            transform: translateY(-5px);
+        }
+
+        .mode-btn.battle {
+            background-color: var(--primary-red);
+            color: white;
+        }
+
+        .mode-btn.squad {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        .mode-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .packages-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .package-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.5s ease forwards;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .package-header {
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+.package-header.Livemurmer {
+  background-color: var(--livemurmer-yellow);
+  color: var(--dark-text); /* Untuk kontras teks */
+}
+
+.package-header.Liveharting {
+  background-color: var(--liveharting-gold);
+  color: var(--dark-text); /* Untuk kontras teks */
+}
+
+.package-header.basic {
+  background-color: var(--success);
+  color: white;
+}
+
+.package-header.pro {
+  background-color: var(--secondary-blue);
+  color: white;
+}
+
+.package-header.epic {
+  background-color: var(--primary-blue);
+  color: white;
+}
+
+.package-header.legend {
+  background: linear-gradient(135deg, var(--accent), var(--primary-red));
+  color: white;
+}
+
+.package-header.bulanan {
+  background: linear-gradient(135deg, #15f9ea, #5f58ff);
+  color: white;
+}
+        
+
+        .package-name {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .package-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .package-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .package-features {
+            padding: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .feature-icon.available {
+            color: var(--success);
+        }
+
+        .feature-icon.unavailable {
+            color: #ccc;
+        }
+
+        .feature-text {
+            font-size: 0.9rem;
+        }
+
+        .features-list {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .features-list.show {
+            max-height: 1000px;
+        }
+
+        .toggle-features {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .toggle-features:hover {
+            background-color: #e9e9e9;
+        }
+
+        .features-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+            background: white;
+            box-shadow: var(--shadow);
+            border-radius: 10px;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .features-table th {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .features-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        .features-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .features-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .feature-name {
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .table-icon {
+            font-size: 1.2rem;
+        }
+
+        .available-icon {
+            color: var(--success);
+        }
+
+        .unavailable-icon {
+            color: #ccc;
+        }
+
+        .purpose-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-top: 40px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .purpose-title {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .purpose-list {
+            list-style-type: none;
+        }
+
+        .purpose-item {
+            padding: 10px 0;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .purpose-item:before {
+            content: "✓";
+            color: var(--success);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (min-width: 769px) {
+    /* Desktop-specific styles */
+    body {
+        font-size: 1rem; /* Pastikan ukuran font konsisten */
+        min-width: 1200px; /* Sesuaikan dengan container */
+    }
+    
+    .packages-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 kolom di desktop */
+    }
+}
+
+        /* Animation delays for package cards */
+        .package-card:nth-child(1) { animation-delay: 0.1s; }
+        .package-card:nth-child(2) { animation-delay: 0.2s; }
+        .package-card:nth-child(3) { animation-delay: 0.3s; }
+        .package-card:nth-child(4) { animation-delay: 0.4s; }
+        .package-card:nth-child(5) { animation-delay: 0.5s; }
+        
+        /* Enhanced Reset */
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SABADA EVENT ORGANIZER</h1>
+            <p class="subtitle">Professional, affordable tournament management for gaming communities</p>
+        </header>
+
+        <div class="mode-selector">
+            <button class="mode-btn battle active" data-mode="battle">Battle Royale</button>
+            <button class="mode-btn squad" data-mode="squad">Squad Fight</button>
+        </div>
+
+        <div id="battle-packages" class="mode-content">
+            <h2>Battle Royale Packages</h2>
+            <div class="packages-container" id="battle-packages-container">
+                <!-- Battle Royale packages will be inserted here by JS -->
+            </div>
+
+            <h2>Feature Comparison</h2>
+            <table class="features-table" id="battle-features-table">
+                <!-- Battle Royale features table will be inserted here by JS -->
+            </table>
+        </div>
+
+        <div id="squad-packages" class="mode-content" style="display: none;">
+            <h2>Squad Fight Packages</h2>
+            <div class="packages-container" id="squad-packages-container">
+                <!-- Squad Fight packages will be inserted here by JS -->
+            </div>
+
+            <h2>Feature Comparison</h2>
+            <table class="features-table" id="squad-features-table">
+                <!-- Squad Fight features table will be inserted here by JS -->
+            </table>
+        </div>
+
+        <div class="purpose-section">
+            <h3 class="purpose-title">Syarat dan ketentuan</h3>
+            <ul class="purpose-list">
+                <li class="purpose-item">Untuk Mempercepat antrian, anda harus menambah biaya tambahan </li>
+                <li class="purpose-item"> khusus Untuk paket Live itu berlaku selama 1 hari </li>
+                <li class="purpose-item"> ada garansi (Pengembalian uang 100% kalau ada kesalahan teknis, error atau dari pihak admin)</li>
+                <li class="purpose-item">Minimal order 7 hari sebelum hari H</li>
+                <li class="purpose-item">Bisa Request Live stream Di akun platform mana aja (kalau tidak ada pakai akun yt adinoki)</li>
+                <li class="purpose-item">Syarat dan ketentuan lainnya bisa tanya admin </li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>SABADA ORGANIZER &copy; 2023 | Designed for gaming communities</p>
+    </footer>
+
+    <script>
+        // Data structure for the EO system
+        const eoSystem = {
+            modes: {
+                battle: {
+                    name: "Battle Royale",
+                    packages: {
+                        Livemurmer: {
+                            price: 3000,
+                            features: [10] 
+                        },
+                        Liveharting: {
+                            price: 5000,
+                            features: [11] 
+                        },
+                        basic: {
+                            price: 8000,
+                            features: [4, 6, 8, 10, 13, 15]
+                        },
+                        pro: {
+                            price: 15000,
+                            features: [1, 2, 4, 6, 8, 11, 13, 15]
+                        },
+                        epic: {
+                            price: 30000,
+                            features: [1, 2, 3, 4, 5, 7, 9, 11, 12, 13, 15]
+                        },
+                        legend: {
+                            price: 50000,
+                            features: [1, 2, 3, 4, 5, 7, 9, 12, 11, 14, 15, 16]
+                        },
+                        bulanan: {
+                            price: 200000,
+                            features: [1, 2, 3, 4, 5, 7, 9, 12, 11, 14, 15, 16]
+                        }
+                    }
+                },
+                squad: {
+                    name: "Squad Fight",
+                    packages: {
+                        Livemurmer: {
+                            price: 3000,
+                            features: [10] 
+                        },
+                        Liveharting: {
+                            price: 5000,
+                            features: [11] 
+                        },
+                        basic: {
+                            price: 8000,
+                            features: [4, 6, 8, 10, 13, 15]
+                        },
+                        pro: {
+                            price: 15000,
+                            features: [1, 2, 4, 6, 8, 11, 13, 15]
+                        },
+                        epic: {
+                            price: 30000,
+                            features: [1, 2, 3, 4, 5, 7, 9, 11, 12, 13, 15]
+                        },
+                        legend: {
+                            price: 50000,
+                            features: [1, 2, 3, 4, 5, 7, 9, 12, 11, 14, 15, 16]
+                        },
+                        bulanan: {
+                            price: 200000,
+                            features: [1, 2, 3, 4, 5, 7, 9, 12, 11, 14, 15, 16]
+                        }
+                    }
+                }
+            },
+            features: [
+            "Formulir Pendaftaran Online",
+            "Data Peserta Terorganisir",
+            "Rekap Point Peserta Tournament",
+            "Sistem Eliminasi Bracket",
+            "Web Leaderboard Dynamic",
+            "Template Poster polos",
+            "Poster Pro+ Branding Event",
+            "Overlay Lite",
+            "Overlay Pro+",
+            "Live Streaming Potrait Mode",
+            "Live Streaming Landscape Mode",
+            "MC atau Host Online Ready",
+            "E-Certificate polos",
+            "E-Certificate pro+",
+            "Tim event/support",
+            "Overlay Nama Team & Player"
+          ]
+        };
+
+        // Format currency for Indonesia
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', { 
+                style: 'currency', 
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Generate package cards
+        function generatePackageCards(mode) {
+            const modeData = eoSystem.modes[mode];
+            const container = document.getElementById(`${mode}-packages-container`);
+            container.innerHTML = '';
+
+            for (const [packageName, packageData] of Object.entries(modeData.packages)) {
+                const packageCard = document.createElement('div');
+                packageCard.className = 'package-card';
+                
+                // Create package header
+                const packageHeader = document.createElement('div');
+                packageHeader.className = `package-header ${packageName}`;
+                
+                const packageNameElement = document.createElement('h3');
+                packageNameElement.className = 'package-name';
+                packageNameElement.textContent = packageName.charAt(0).toUpperCase() + packageName.slice(1);
+                
+                const packagePrice = document.createElement('div');
+                packagePrice.className = 'package-price';
+                packagePrice.textContent = formatCurrency(packageData.price);
+                
+                const packageDesc = document.createElement('div');
+                packageDesc.className = 'package-desc';
+                packageDesc.textContent = `${packageData.features.length} of ${eoSystem.features.length} features enabled`;
+                
+                packageHeader.appendChild(packageNameElement);
+                packageHeader.appendChild(packagePrice);
+                packageHeader.appendChild(packageDesc);
+                
+                // Create features list
+                const featuresList = document.createElement('div');
+                featuresList.className = 'features-list';
+                
+                // Show first 4 features and a toggle for the rest
+                const visibleFeatures = packageData.features.slice(0, 4);
+                const hiddenFeatures = packageData.features.slice(4);
+                
+                visibleFeatures.forEach(featIndex => {
+                    const featureItem = createFeatureItem(featIndex, true);
+                    featuresList.appendChild(featureItem);
+                });
+                
+                // Add toggle button if there are hidden features
+                if (hiddenFeatures.length > 0) {
+                    const toggleBtn = document.createElement('button');
+                    toggleBtn.className = 'toggle-features';
+                    toggleBtn.textContent = `Show ${hiddenFeatures.length} more features`;
+                    toggleBtn.addEventListener('click', function() {
+                        const isExpanded = featuresList.classList.contains('show');
+                        if (isExpanded) {
+                            featuresList.classList.remove('show');
+                            toggleBtn.textContent = `Show ${hiddenFeatures.length} more features`;
+                        } else {
+                            // Add hidden features if not already added
+                            if (featuresList.children.length === visibleFeatures.length + 1) {
+                                hiddenFeatures.forEach(featIndex => {
+                                    const featureItem = createFeatureItem(featIndex, true);
+                                    featuresList.appendChild(featureItem);
+                                });
+                            }
+                            featuresList.classList.add('show');
+                            toggleBtn.textContent = 'Hide features';
+                        }
+                    });
+                    
+                    packageCard.appendChild(packageHeader);
+                    packageCard.appendChild(featuresList);
+                    packageCard.appendChild(toggleBtn);
+                } else {
+                    packageCard.appendChild(packageHeader);
+                    packageCard.appendChild(featuresList);
+                }
+                
+                container.appendChild(packageCard);
+            }
+        }
+
+        // Create a feature list item
+        function createFeatureItem(index, isAvailable) {
+            const featureItem = document.createElement('div');
+            featureItem.className = 'feature-item';
+            
+            const featureIcon = document.createElement('span');
+            featureIcon.className = `feature-icon ${isAvailable ? 'available' : 'unavailable'}`;
+            featureIcon.innerHTML = isAvailable ? '✓' : '✕';
+            
+            const featureText = document.createElement('span');
+            featureText.className = 'feature-text';
+            featureText.textContent = eoSystem.features[index - 1];
+            
+            featureItem.appendChild(featureIcon);
+            featureItem.appendChild(featureText);
+            
+            return featureItem;
+        }
+
+        // Generate features comparison table
+        function generateFeaturesTable(mode) {
+            const modeData = eoSystem.modes[mode];
+            const table = document.getElementById(`${mode}-features-table`);
+            table.innerHTML = '';
+            
+            // Create table header
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            
+            const featureHeader = document.createElement('th');
+            featureHeader.textContent = 'Feature';
+            headerRow.appendChild(featureHeader);
+            
+            for (const packageName of Object.keys(modeData.packages)) {
+                const packageHeader = document.createElement('th');
+                packageHeader.textContent = packageName.charAt(0).toUpperCase() + packageName.slice(1);
+                headerRow.appendChild(packageHeader);
+            }
+            
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+            
+            // Create table body
+            const tbody = document.createElement('tbody');
+            
+            eoSystem.features.forEach((feature, index) => {
+                const row = document.createElement('tr');
+                
+                const featureCell = document.createElement('td');
+                featureCell.className = 'feature-name';
+                featureCell.textContent = feature;
+                row.appendChild(featureCell);
+                
+                for (const packageData of Object.values(modeData.packages)) {
+                    const cell = document.createElement('td');
+                    const icon = document.createElement('span');
+                    icon.className = 'table-icon';
+                    
+                    if (packageData.features.includes(index + 1)) {
+                        icon.classList.add('available-icon');
+                        icon.innerHTML = '✓';
+                    } else {
+                        icon.classList.add('unavailable-icon');
+                        icon.innerHTML = '✕';
+                    }
+                    
+                    cell.appendChild(icon);
+                    row.appendChild(cell);
+                }
+                
+                tbody.appendChild(row);
+            });
+            
+            table.appendChild(tbody);
+        }
+
+        // Switch between modes
+        function switchMode(mode) {
+            document.getElementById('battle-packages').style.display = mode === 'battle' ? 'block' : 'none';
+            document.getElementById('squad-packages').style.display = mode === 'squad' ? 'block' : 'none';
+            
+            const battleBtn = document.querySelector('.mode-btn.battle');
+            const squadBtn = document.querySelector('.mode-btn.squad');
+            
+            if (mode === 'battle') {
+                battleBtn.classList.add('active');
+                squadBtn.classList.remove('active');
+            } else {
+                battleBtn.classList.remove('active');
+                squadBtn.classList.add('active');
+            }
+        }
+
+        // Initialize the page
+        function init() {
+            // Generate content for both modes
+            generatePackageCards('battle');
+            generateFeaturesTable('battle');
+            generatePackageCards('squad');
+            generateFeaturesTable('squad');
+            
+            // Set up mode switch event listeners
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    switchMode(this.dataset.mode);
+                });
+            });
+            
+            // Set initial mode to Battle Royale
+            switchMode('battle');
+        }
+
+        // Run initialization when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+    
+    <a href="https://wa.me/6282125301595?text=mau order Sabada Organizer kak sora" 
+    target="_blank" 
+    style="
+    position: fixed;
+    bottom: 20px;
+    right: 10px;
+    background-color: white;
+    color: black;
+    padding: 12px 18px;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border: 1px solid #ccc;
+    font-weight: bold;
+    z-index: 999;
+">
+   Order Sekarang
+</a>
+    <a href="https://whatsapp.com/channel/0029Vb6ZMp3Chq6WUhpfAn2v" 
+    target="_blank" 
+    style="
+    position: fixed;
+    bottom: 20px;
+    left: 10px;
+    background-color: #1de0f4;
+    color: black;
+    padding: 12px 18px;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border: 1px solid #ccc;
+    font-weight: bold;
+    z-index: 999;
+">
+   Gabung Saluran whatsapp
+</a>
+</body>
+</html>
