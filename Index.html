@@ -2,24 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BloodStrike EO System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabada Organizer - Jasa Turnamen & Komunitas Game Terbaik</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-red: #e63946;
-            --primary-blue: #1d3557;
-            --secondary-red: #ff686b;
-            --secondary-blue: #457b9d;
-            --light-bg: #f8f9fa;
-            --dark-text: #212529;
-            --light-text: #f8f9fa;
-            --accent: #ffd166;
-            --success: #06d6a0;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-            --livemurmer-yellow: #e7fe2b;
-            --liveharting-gold: #d4b007;
-
+            --primary: #e63946;
+            --primary-dark: #c1121f;
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #2a9d8f;
         }
 
         * {
@@ -27,19 +20,13 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-size-adjust: none;
-            -webkit-text-size-adjust: none;
-            -moz-text-size-adjust: none;
-            -ms-text-size-adjust: none;
         }
 
         body {
-            background-color: var(--light-bg);
-            color: var(--dark-text);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
+            background-color: #f5f5f5;
+            color: var(--dark);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .container {
@@ -48,712 +35,967 @@
             padding: 20px;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, var(--primary-red), var(--primary-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        .mode-selector {
+        /* Header/Landing Page */
+        .landing-page {
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            margin-bottom: 30px;
-            gap: 20px;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .mode-btn {
-            padding: 12px 25px;
+        .landing-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+            opacity: 0.3;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            max-width: 800px;
+            line-height: 1.6;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
             border: none;
             border-radius: 50px;
-            font-size: 1rem;
-            font-weight: bold;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+            margin: 10px;
+            animation: fadeInUp 1s ease;
         }
 
-        .mode-btn.active {
-            transform: translateY(-5px);
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.6);
         }
 
-        .mode-btn.battle {
-            background-color: var(--primary-red);
-            color: white;
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            box-shadow: none;
         }
 
-        .mode-btn.squad {
-            background-color: var(--primary-blue);
-            color: white;
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .mode-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        .packages-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .package-card {
-            background: white;
+        /* Checkout Steps */
+        .checkout-container {
+            display: none;
+            background-color: white;
             border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            opacity: 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 800px;
             transform: translateY(20px);
-            animation: slideUp 0.5s ease forwards;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease forwards;
         }
 
-        .package-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        .step-header {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
-        .package-header {
+        .step-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .step-subtitle {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2);
+            outline: none;
+        }
+
+        /* Game Selection */
+        .game-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .game-option {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .game-option input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .game-card {
+            background-color: white;
+            border: 2px solid #eee;
+            border-radius: 10px;
             padding: 20px;
             text-align: center;
-            color: white;
-            position: relative;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        
-.package-header.Livemurmer {
-  background-color: var(--livemurmer-yellow);
-  color: var(--dark-text); /* Untuk kontras teks */
-}
 
-.package-header.Liveharting {
-  background-color: var(--liveharting-gold);
-  color: var(--dark-text); /* Untuk kontras teks */
-}
+        .game-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
 
-.package-header.basic {
-  background-color: var(--success);
-  color: white;
-}
+        .game-option input:checked + .game-card {
+            border-color: var(--primary);
+            background-color: rgba(230, 57, 70, 0.05);
+        }
 
-.package-header.pro {
-  background-color: var(--secondary-blue);
-  color: white;
-}
+        .game-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
 
-.package-header.epic {
-  background-color: var(--primary-blue);
-  color: white;
-}
+        .game-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
 
-.package-header.legend {
-  background: linear-gradient(135deg, var(--accent), var(--primary-red));
-  color: white;
-}
+        /* Package Selection */
+        .package-options {
+            margin-top: 20px;
+        }
 
-.package-header.bulanan {
-  background: linear-gradient(135deg, #15f9ea, #5f58ff);
-  color: white;
-}
-        
+        .package-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .package-option:hover {
+            border-color: var(--primary);
+        }
+
+        .package-checkbox {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+
+        .package-details {
+            flex-grow: 1;
+        }
 
         .package-name {
-            font-size: 1.5rem;
+            font-weight: 600;
             margin-bottom: 5px;
         }
 
         .package-price {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 10px;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
         }
 
-        .package-desc {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .package-features {
-            padding: 20px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .feature-item:last-child {
-            border-bottom: none;
-        }
-
-        .feature-icon {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-
-        .feature-icon.available {
-            color: var(--success);
-        }
-
-        .feature-icon.unavailable {
-            color: #ccc;
-        }
-
-        .feature-text {
-            font-size: 0.9rem;
-        }
-
-        .features-list {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-        }
-
-        .features-list.show {
-            max-height: 1000px;
-        }
-
-        .toggle-features {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #f1f1f1;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-            font-weight: bold;
-            transition: var(--transition);
-        }
-
-        .toggle-features:hover {
-            background-color: #e9e9e9;
-        }
-
-        .features-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 40px;
-            background: white;
-            box-shadow: var(--shadow);
-            border-radius: 10px;
-            overflow: hidden;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .features-table th {
-            background-color: var(--primary-blue);
-            color: white;
+        /* Terms and Conditions */
+        .terms-container {
+            max-height: 300px;
+            overflow-y: auto;
             padding: 15px;
-            text-align: center;
-        }
-
-        .features-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #eee;
-            text-align: center;
-        }
-
-        .features-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .features-table tr:nth-child(even) {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 20px;
             background-color: #f9f9f9;
         }
 
-        .feature-name {
-            text-align: left;
-            font-weight: 500;
+        .terms-title {
+            font-weight: 700;
+            margin-bottom: 10px;
         }
 
-        .table-icon {
-            font-size: 1.2rem;
-        }
-
-        .available-icon {
-            color: var(--success);
-        }
-
-        .unavailable-icon {
-            color: #ccc;
-        }
-
-        .purpose-section {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            margin-top: 40px;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .purpose-title {
-            color: var(--primary-blue);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .purpose-list {
-            list-style-type: none;
-        }
-
-        .purpose-item {
-            padding: 10px 0;
-            position: relative;
-            padding-left: 30px;
-        }
-
-        .purpose-item:before {
-            content: "✓";
-            color: var(--success);
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            color: #666;
+        .terms-content {
+            line-height: 1.6;
             font-size: 0.9rem;
         }
 
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn-prev {
+            background-color: var(--gray);
+            box-shadow: none;
+        }
+
+        .btn-prev:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-next {
+            margin-left: auto;
+        }
+
+        /* Summary */
+        .summary-container {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .summary-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .summary-label {
+            font-weight: 600;
+        }
+
+        .total-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Progress Steps */
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #eee;
+            z-index: 1;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            height: 2px;
+            background-color: var(--primary);
+            z-index: 2;
+            transition: width 0.4s ease;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #eee;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .step.active .step-number {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .step.completed .step-number {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-align: center;
+        }
+
+        .step.active .step-label {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .step.completed .step-label {
+            color: var(--success);
+        }
+
+        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
 
-        @keyframes slideUp {
-            from { 
+        @keyframes fadeInUp {
+            from {
                 opacity: 0;
                 transform: translateY(20px);
             }
-            to { 
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        @media (min-width: 769px) {
-    /* Desktop-specific styles */
-    body {
-        font-size: 1rem; /* Pastikan ukuran font konsisten */
-        min-width: 1200px; /* Sesuaikan dengan container */
-    }
-    
-    .packages-container {
-        grid-template-columns: repeat(3, 1fr); /* 3 kolom di desktop */
-    }
-}
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-        /* Animation delays for package cards */
-        .package-card:nth-child(1) { animation-delay: 0.1s; }
-        .package-card:nth-child(2) { animation-delay: 0.2s; }
-        .package-card:nth-child(3) { animation-delay: 0.3s; }
-        .package-card:nth-child(4) { animation-delay: 0.4s; }
-        .package-card:nth-child(5) { animation-delay: 0.5s; }
-        
-        /* Enhanced Reset */
-html {
-    font-size: 16px;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-}
+        /* Responsive */
+        @media (max-width: 768px) {
+            .game-options {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
 
+            .checkout-container {
+                padding: 20px;
+            }
+
+            .step-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            .progress-steps {
+                margin-bottom: 30px;
+            }
+
+            .step-label {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Landing Page -->
+    <section class="landing-page" id="landingPage">
+        <h1 class="logo">Sabada Organizer</h1>
+        <p class="tagline">Jasa Turnamen & Komunitas Game Terbaik!</p>
+        <div>
+            <a href="#" class="btn" id="startCheckout">Pesan Sekarang</a>
+            <p class="tagline">Saran : Kalau Tidak bisa Ditekan Tombolnya Bisa relog, Terus Langsung Tekan Tombol (Harus Cepat!!)</p>
+        </div>
+    </section>
+
+    <!-- Checkout Steps Container -->
     <div class="container">
-        <header>
-            <h1>SABADA EVENT ORGANIZER</h1>
-            <p class="subtitle">Professional, affordable tournament management for gaming communities</p>
-        </header>
-
-        <div class="mode-selector">
-            <button class="mode-btn battle active" data-mode="battle">Battle Royale</button>
-            <button class="mode-btn squad" data-mode="squad">Squad Fight</button>
-        </div>
-
-        <div id="battle-packages" class="mode-content">
-            <h2>Battle Royale Packages</h2>
-            <div class="packages-container" id="battle-packages-container">
-                <!-- Battle Royale packages will be inserted here by JS -->
+        <!-- Progress Steps -->
+        <div class="progress-steps" id="progressSteps">
+            <div class="progress-bar" id="progressBar"></div>
+            <div class="step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-label">Data Diri</div>
             </div>
-
-            <h2>Feature Comparison</h2>
-            <table class="features-table" id="battle-features-table">
-                <!-- Battle Royale features table will be inserted here by JS -->
-            </table>
-        </div>
-
-        <div id="squad-packages" class="mode-content" style="display: none;">
-            <h2>Squad Fight Packages</h2>
-            <div class="packages-container" id="squad-packages-container">
-                <!-- Squad Fight packages will be inserted here by JS -->
+            <div class="step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-label">Pilih Game</div>
             </div>
-
-            <h2>Feature Comparison</h2>
-            <table class="features-table" id="squad-features-table">
-                <!-- Squad Fight features table will be inserted here by JS -->
-            </table>
+            <div class="step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-label">Pilih Paket</div>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-number">4</div>
+                <div class="step-label">Konfirmasi</div>
+            </div>
         </div>
 
-        <div class="purpose-section">
-            <h3 class="purpose-title">Syarat dan ketentuan</h3>
-            <ul class="purpose-list">
-                <li class="purpose-item">Untuk Mempercepat antrian, anda harus menambah biaya tambahan </li>
-                <li class="purpose-item"> khusus Untuk paket Live itu berlaku selama 1 hari </li>
-                <li class="purpose-item"> ada garansi (Pengembalian uang 100% kalau ada kesalahan teknis, error atau dari pihak admin)</li>
-                <li class="purpose-item">Minimal order 7 hari sebelum hari H</li>
-                <li class="purpose-item">Bisa Request Live stream Di akun platform mana aja (kalau tidak ada pakai akun yt adinoki)</li>
-                <li class="purpose-item">Syarat dan ketentuan lainnya bisa tanya admin </li>
-            </ul>
+        <!-- Step 1: Personal Data -->
+        <div class="checkout-container" id="step1">
+            <div class="step-header">
+                <h2 class="step-title">Data Diri</h2>
+                <p class="step-subtitle">Isi data diri Anda untuk memulai pesanan</p>
+            </div>
+            <form id="personalDataForm">
+                <div class="form-group">
+                    <label for="fullName" class="form-label">Nama Lengkap</label>
+                    <input type="text" id="fullName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="communityName" class="form-label">Nama Komunitas</label>
+                    <input type="text" id="communityName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="whatsappNumber" class="form-label">Nomor WhatsApp Aktif</label>
+                    <input type="tel" id="whatsappNumber" class="form-control" required>
+                </div>
+                <div class="nav-buttons">
+                    <button type="button" class="btn btn-prev" disabled>Sebelumnya</button>
+                    <button type="button" class="btn btn-next" id="nextToStep2">Selanjutnya</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Step 2: Game Selection -->
+        <div class="checkout-container" id="step2">
+            <div class="step-header">
+                <h2 class="step-title">Pilih Kategori Game</h2>
+                <p class="step-subtitle">Pilih game yang ingin Anda adakan turnamennya</p>
+            </div>
+            <div class="game-options" id="gameOptions">
+                <!-- Game options will be populated by JavaScript -->
+            </div>
+            <div class="nav-buttons">
+                <button type="button" class="btn btn-prev" id="prevToStep1">Sebelumnya</button>
+                <button type="button" class="btn btn-next" id="nextToStep3" disabled>Selanjutnya</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Package Selection -->
+        <div class="checkout-container" id="step3">
+            <div class="step-header">
+                <h2 class="step-title">Pilih Paket Turnamen</h2>
+                <p class="step-subtitle">Pilih paket yang sesuai dengan kebutuhan Anda</p>
+            </div>
+            <div id="packageOptions">
+                <!-- Package options will be populated by JavaScript based on selected game -->
+                <p class="text-center">Silakan pilih game terlebih dahulu</p>
+            </div>
+            <div class="summary-container" id="priceSummary">
+                <div class="summary-title">Ringkasan Pesanan</div>
+                <div class="summary-item">
+                    <span class="summary-label">Total:</span>
+                    <span class="summary-value" id="totalPrice">Rp 0</span>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button type="button" class="btn btn-prev" id="prevToStep2">Sebelumnya</button>
+                <button type="button" class="btn btn-next" id="nextToStep4" disabled>Selanjutnya</button>
+            </div>
+        </div>
+
+        <!-- Step 4: Confirmation -->
+        <div class="checkout-container" id="step4">
+            <div class="step-header">
+                <h2 class="step-title">Konfirmasi Pesanan</h2>
+                <p class="step-subtitle">Tinjau pesanan Anda sebelum mengirim</p>
+            </div>
+            <div class="summary-container">
+                <div class="summary-title">Detail Pesanan</div>
+                <div class="summary-item">
+                    <span class="summary-label">Nama:</span>
+                    <span class="summary-value" id="summaryName"></span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Komunitas:</span>
+                    <span class="summary-value" id="summaryCommunity"></span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Nomor WhatsApp:</span>
+                    <span class="summary-value" id="summaryWhatsapp"></span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Game:</span>
+                    <span class="summary-value" id="summaryGame"></span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Paket:</span>
+                    <span class="summary-value" id="summaryPackages"></span>
+                </div>
+                <div class="total-price">
+                    Total Harga: <span id="summaryTotalPrice">Rp 0</span>
+                </div>
+            </div>
+            <div class="terms-container">
+                <div class="terms-title">Syarat & Ketentuan</div>
+                <div class="terms-content">
+                    <p>1. Dengan melakukan pemesanan, Anda menyetujui semua syarat dan ketentuan yang berlaku.</p>
+                    <p>2. Pembayaran dilakukan setelah konfirmasi dari admin Sabada Organizer.</p>
+                    <p>3. Pesanan dapat dibatalkan maksimal 24 jam sebelum pelaksanaan turnamen.</p>
+                    <p>4. Sabada Organizer berhak membatalkan pesanan jika terdapat indikasi penipuan.</p>
+                    <p>5. Semua data yang diberikan akan dijaga kerahasiaannya.</p>
+                    <p>6. Untuk pertanyaan lebih lanjut, silakan hubungi admin kami.</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="agreeTerms" class="package-checkbox">
+                <label for="agreeTerms">Saya setuju dengan syarat & ketentuan</label>
+            </div>
+            <div class="nav-buttons">
+                <button type="button" class="btn btn-prev" id="prevToStep3">Sebelumnya</button>
+                <button type="button" class="btn" id="placeOrder" disabled>Order via WhatsApp</button>
+            </div>
         </div>
     </div>
 
-    <footer>
-        <p>SABADA ORGANIZER &copy; 2023 | Designed for gaming communities</p>
-    </footer>
 
     <script>
-        // Data structure for the EO system
-        const eoSystem = {
-            modes: {
-                battle: {
-                    name: "Battle Royale",
-                    packages: {
-                        Livemurmer: {
-                            price: 3000,
-                            features: [10] 
-                        },
-                        Liveharting: {
-                            price: 5000,
-                            features: [11] 
-                        },
-                        basic: {
-                            price: 6000,
-                            features: [4, 6, 8, 10, 13, 15]
-                        },
-                        pro: {
-                            price: 15000,
-                            features: [1, 2, 4, 6, 8, 11, 13, 15]
-                        },
-                        epic: {
-                            price: 30000,
-                            features: [1, 2, 3, 4, 5, 7, 9, 11, 12, 13, 15]
-                        },
-                        legend: {
-                            price: 50000,
-                            features: [1, 2, 3, 4, 5, 7, 9, 12, 11, 14, 15, 16]
-                        },
-                        bulanan: {
-                            price: 200000,
-                            features: [1, 2, 3, 4, 5, 7, 9, 12, 11, 14, 15, 16]
-                        }
-                    }
-                },
-                squad: {
-                    name: "Squad Fight",
-                    packages: {
-                        Livemurmer: {
-                            price: 3000,
-                            features: [10] 
-                        },
-                        Liveharting: {
-                            price: 5000,
-                            features: [11] 
-                        },
-                        basic: {
-                            price: 6000,
-                            features: [4, 6, 8, 10, 13, 15]
-                        },
-                        pro: {
-                            price: 15000,
-                            features: [1, 2, 4, 6, 8, 11, 13, 15]
-                        },
-                        epic: {
-                            price: 30000,
-                            features: [1, 2, 3, 4, 5, 7, 9, 11, 12, 13, 15]
-                        },
-                        legend: {
-                            price: 50000,
-                            features: [1, 2, 3, 4, 5, 7, 9, 12, 11, 14, 15, 16]
-                        },
-                        bulanan: {
-                            price: 200000,
-                            features: [1, 2, 3, 4, 5, 7, 9, 12, 11, 14, 15, 16]
-                        }
-                    }
-                }
+        // Game and Package Data
+        const gameData = [
+            {
+                id: 'ml',
+                name: 'Mobile Legends',
+                icon: 'fa-mobile-screen',
+                packages: [
+                ]
             },
-            features: [
-            "Formulir Pendaftaran Online",
-            "Data Peserta Terorganisir",
-            "Rekap Point Peserta Tournament",
-            "Sistem Eliminasi Bracket",
-            "Web Leaderboard Dynamic",
-            "Template Poster polos",
-            "Poster Pro+ Branding Event",
-            "Overlay Lite",
-            "Overlay Pro+",
-            "Live Streaming Potrait Mode",
-            "Live Streaming Landscape Mode",
-            "MC atau Host Online Ready",
-            "E-Certificate polos",
-            "E-Certificate pro+",
-            "Tim event/support",
-            "Overlay Nama Team & Player"
-          ]
+            {
+                id: 'bs',
+                name: 'Bloodstrike',
+                icon: 'fa-gun',
+                packages: [
+  { id: 'bs1', name: 'Formulir Pendaftaran Online', price: 2000 },
+  { id: 'bs2', name: 'Data sheet Peserta Terorganisir', price: 2000 },
+  { id: 'bs3', name: 'Rekap Point Peserta Tournament', price: 5000 },
+  { id: 'bs4', name: 'Sistem Eliminasi Bracket', price: 5000 },
+  { id: 'bs5', name: 'Web Leaderboard Dynamic', price: 17000 },
+  { id: 'bs6', name: 'Template Poster polos', price: 7000 },
+  { id: 'bs7', name: 'Poster Pro+ Branding Event', price: 20000 },
+  { id: 'bs8', name: 'Overlay Lite', price: 15000 },
+  { id: 'bs9', name: 'Overlay Pro+', price: 25000 },
+  { id: 'bs10', name: 'Live Streaming Potrait Mode', price: 3000 },
+  { id: 'bs11', name: 'Live Streaming Landscape Mode', price: 5000 },
+  { id: 'bs12', name: 'E-Certificate polos', price: 10000 },
+  { id: 'bs13', name: 'E-Certificate pro+', price: 15000 },
+  { id: 'bs14', name: 'Tim teknis event/support', price: 5000 },
+  { id: 'bs15', name: 'Overlay Nama Team & Player', price: 20000 }
+                ]
+            },
+            {
+                id: 'pubg',
+                name: 'PUBG Mobile',
+                icon: 'fa-person-rifle',
+                packages: [
+                ]
+            },
+            {
+                id: 'val',
+                name: 'Valorant',
+                icon: 'fa-crosshairs',
+                packages: [
+                ]
+            },
+            {
+                id: 'ff',
+                name: 'Free Fire',
+                icon: 'fa-fire',
+                packages: [
+                ]
+            }
+        ];
+
+        // DOM Elements
+        const landingPage = document.getElementById('landingPage');
+        const checkoutContainers = document.querySelectorAll('.checkout-container');
+        const progressSteps = document.querySelectorAll('.step');
+        const progressBar = document.getElementById('progressBar');
+        const startCheckoutBtn = document.getElementById('startCheckout');
+        const nextButtons = {
+            step1: document.getElementById('nextToStep2'),
+            step2: document.getElementById('nextToStep3'),
+            step3: document.getElementById('nextToStep4')
         };
+        const prevButtons = {
+            step1: document.getElementById('prevToStep1'),
+            step2: document.getElementById('prevToStep2'),
+            step3: document.getElementById('prevToStep3')
+        };
+        const placeOrderBtn = document.getElementById('placeOrder');
+        const agreeTermsCheckbox = document.getElementById('agreeTerms');
+        const gameOptionsContainer = document.getElementById('gameOptions');
+        const packageOptionsContainer = document.getElementById('packageOptions');
+        const priceSummaryContainer = document.getElementById('priceSummary');
+        const totalPriceElement = document.getElementById('totalPrice');
+        
+        // Summary elements
+        const summaryName = document.getElementById('summaryName');
+        const summaryCommunity = document.getElementById('summaryCommunity');
+        const summaryWhatsapp = document.getElementById('summaryWhatsapp');
+        const summaryGame = document.getElementById('summaryGame');
+        const summaryPackages = document.getElementById('summaryPackages');
+        const summaryTotalPrice = document.getElementById('summaryTotalPrice');
 
-        // Format currency for Indonesia
-        function formatCurrency(amount) {
-            return new Intl.NumberFormat('id-ID', { 
-                style: 'currency', 
-                currency: 'IDR',
-                minimumFractionDigits: 0
-            }).format(amount);
-        }
-
-        // Generate package cards
-        function generatePackageCards(mode) {
-            const modeData = eoSystem.modes[mode];
-            const container = document.getElementById(`${mode}-packages-container`);
-            container.innerHTML = '';
-
-            for (const [packageName, packageData] of Object.entries(modeData.packages)) {
-                const packageCard = document.createElement('div');
-                packageCard.className = 'package-card';
-                
-                // Create package header
-                const packageHeader = document.createElement('div');
-                packageHeader.className = `package-header ${packageName}`;
-                
-                const packageNameElement = document.createElement('h3');
-                packageNameElement.className = 'package-name';
-                packageNameElement.textContent = packageName.charAt(0).toUpperCase() + packageName.slice(1);
-                
-                const packagePrice = document.createElement('div');
-                packagePrice.className = 'package-price';
-                packagePrice.textContent = formatCurrency(packageData.price);
-                
-                const packageDesc = document.createElement('div');
-                packageDesc.className = 'package-desc';
-                packageDesc.textContent = `${packageData.features.length} of ${eoSystem.features.length} features enabled`;
-                
-                packageHeader.appendChild(packageNameElement);
-                packageHeader.appendChild(packagePrice);
-                packageHeader.appendChild(packageDesc);
-                
-                // Create features list
-                const featuresList = document.createElement('div');
-                featuresList.className = 'features-list';
-                
-                // Show first 4 features and a toggle for the rest
-                const visibleFeatures = packageData.features.slice(0, 4);
-                const hiddenFeatures = packageData.features.slice(4);
-                
-                visibleFeatures.forEach(featIndex => {
-                    const featureItem = createFeatureItem(featIndex, true);
-                    featuresList.appendChild(featureItem);
-                });
-                
-                // Add toggle button if there are hidden features
-                if (hiddenFeatures.length > 0) {
-                    const toggleBtn = document.createElement('button');
-                    toggleBtn.className = 'toggle-features';
-                    toggleBtn.textContent = `Show ${hiddenFeatures.length} more features`;
-                    toggleBtn.addEventListener('click', function() {
-                        const isExpanded = featuresList.classList.contains('show');
-                        if (isExpanded) {
-                            featuresList.classList.remove('show');
-                            toggleBtn.textContent = `Show ${hiddenFeatures.length} more features`;
-                        } else {
-                            // Add hidden features if not already added
-                            if (featuresList.children.length === visibleFeatures.length + 1) {
-                                hiddenFeatures.forEach(featIndex => {
-                                    const featureItem = createFeatureItem(featIndex, true);
-                                    featuresList.appendChild(featureItem);
-                                });
-                            }
-                            featuresList.classList.add('show');
-                            toggleBtn.textContent = 'Hide features';
-                        }
-                    });
-                    
-                    packageCard.appendChild(packageHeader);
-                    packageCard.appendChild(featuresList);
-                    packageCard.appendChild(toggleBtn);
-                } else {
-                    packageCard.appendChild(packageHeader);
-                    packageCard.appendChild(featuresList);
-                }
-                
-                container.appendChild(packageCard);
-            }
-        }
-
-        // Create a feature list item
-        function createFeatureItem(index, isAvailable) {
-            const featureItem = document.createElement('div');
-            featureItem.className = 'feature-item';
-            
-            const featureIcon = document.createElement('span');
-            featureIcon.className = `feature-icon ${isAvailable ? 'available' : 'unavailable'}`;
-            featureIcon.innerHTML = isAvailable ? '✓' : '✕';
-            
-            const featureText = document.createElement('span');
-            featureText.className = 'feature-text';
-            featureText.textContent = eoSystem.features[index - 1];
-            
-            featureItem.appendChild(featureIcon);
-            featureItem.appendChild(featureText);
-            
-            return featureItem;
-        }
-
-        // Generate features comparison table
-        function generateFeaturesTable(mode) {
-            const modeData = eoSystem.modes[mode];
-            const table = document.getElementById(`${mode}-features-table`);
-            table.innerHTML = '';
-            
-            // Create table header
-            const thead = document.createElement('thead');
-            const headerRow = document.createElement('tr');
-            
-            const featureHeader = document.createElement('th');
-            featureHeader.textContent = 'Feature';
-            headerRow.appendChild(featureHeader);
-            
-            for (const packageName of Object.keys(modeData.packages)) {
-                const packageHeader = document.createElement('th');
-                packageHeader.textContent = packageName.charAt(0).toUpperCase() + packageName.slice(1);
-                headerRow.appendChild(packageHeader);
-            }
-            
-            thead.appendChild(headerRow);
-            table.appendChild(thead);
-            
-            // Create table body
-            const tbody = document.createElement('tbody');
-            
-            eoSystem.features.forEach((feature, index) => {
-                const row = document.createElement('tr');
-                
-                const featureCell = document.createElement('td');
-                featureCell.className = 'feature-name';
-                featureCell.textContent = feature;
-                row.appendChild(featureCell);
-                
-                for (const packageData of Object.values(modeData.packages)) {
-                    const cell = document.createElement('td');
-                    const icon = document.createElement('span');
-                    icon.className = 'table-icon';
-                    
-                    if (packageData.features.includes(index + 1)) {
-                        icon.classList.add('available-icon');
-                        icon.innerHTML = '✓';
-                    } else {
-                        icon.classList.add('unavailable-icon');
-                        icon.innerHTML = '✕';
-                    }
-                    
-                    cell.appendChild(icon);
-                    row.appendChild(cell);
-                }
-                
-                tbody.appendChild(row);
-            });
-            
-            table.appendChild(tbody);
-        }
-
-        // Switch between modes
-        function switchMode(mode) {
-            document.getElementById('battle-packages').style.display = mode === 'battle' ? 'block' : 'none';
-            document.getElementById('squad-packages').style.display = mode === 'squad' ? 'block' : 'none';
-            
-            const battleBtn = document.querySelector('.mode-btn.battle');
-            const squadBtn = document.querySelector('.mode-btn.squad');
-            
-            if (mode === 'battle') {
-                battleBtn.classList.add('active');
-                squadBtn.classList.remove('active');
-            } else {
-                battleBtn.classList.remove('active');
-                squadBtn.classList.add('active');
-            }
-        }
+        // State variables
+        let currentStep = 0;
+        let selectedGame = null;
+        let selectedPackages = [];
+        let orderTotal = 0;
 
         // Initialize the page
         function init() {
-            // Generate content for both modes
-            generatePackageCards('battle');
-            generateFeaturesTable('battle');
-            generatePackageCards('squad');
-            generateFeaturesTable('squad');
-            
-            // Set up mode switch event listeners
-            document.querySelectorAll('.mode-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    switchMode(this.dataset.mode);
-                });
+            // Hide all checkout containers initially
+            checkoutContainers.forEach(container => {
+                container.style.display = 'none';
             });
+
+            // Populate game options
+            renderGameOptions();
+
+            // Event listeners
+            startCheckoutBtn.addEventListener('click', startCheckout);
             
-            // Set initial mode to Battle Royale
-            switchMode('battle');
+            // Next button listeners
+            nextButtons.step1.addEventListener('click', () => validateAndProceed(1));
+            nextButtons.step2.addEventListener('click', () => validateAndProceed(2));
+            nextButtons.step3.addEventListener('click', () => validateAndProceed(3));
+            
+            // Previous button listeners
+            prevButtons.step1.addEventListener('click', () => goToStep(0));
+            prevButtons.step2.addEventListener('click', () => goToStep(1));
+            prevButtons.step3.addEventListener('click', () => goToStep(2));
+            
+            // Place order button
+            placeOrderBtn.addEventListener('click', placeOrder);
+            agreeTermsCheckbox.addEventListener('change', () => {
+                placeOrderBtn.disabled = !agreeTermsCheckbox.checked;
+            });
         }
 
-        // Run initialization when DOM is loaded
+        // Render game options
+        function renderGameOptions() {
+            gameOptionsContainer.innerHTML = '';
+            
+            gameData.forEach(game => {
+                const gameOption = document.createElement('div');
+                gameOption.className = 'game-option';
+                
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'game';
+                input.id = game.id;
+                input.value = game.id;
+                input.addEventListener('change', () => {
+                    if (input.checked) {
+                        selectedGame = game;
+                        renderPackageOptions();
+                        nextButtons.step2.disabled = false;
+                    }
+                });
+                
+                const card = document.createElement('label');
+                card.className = 'game-card';
+                card.htmlFor = game.id;
+                
+                const icon = document.createElement('i');
+                icon.className = `game-icon fas ${game.icon}`;
+                
+                const name = document.createElement('div');
+                name.className = 'game-name';
+                name.textContent = game.name;
+                
+                card.appendChild(icon);
+                card.appendChild(name);
+                gameOption.appendChild(input);
+                gameOption.appendChild(card);
+                
+                gameOptionsContainer.appendChild(gameOption);
+            });
+        }
+
+        // Render package options based on selected game
+        function renderPackageOptions() {
+            if (!selectedGame) return;
+            
+            packageOptionsContainer.innerHTML = '';
+            selectedPackages = [];
+            orderTotal = 0;
+            updateTotalPrice();
+            
+            const packageList = document.createElement('div');
+            packageList.className = 'package-options';
+            
+            selectedGame.packages.forEach(pkg => {
+                const packageOption = document.createElement('div');
+                packageOption.className = 'package-option';
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = pkg.id;
+                checkbox.className = 'package-checkbox';
+                checkbox.value = pkg.id;
+                checkbox.addEventListener('change', () => {
+                    if (checkbox.checked) {
+                        selectedPackages.push(pkg);
+                    } else {
+                        selectedPackages = selectedPackages.filter(item => item.id !== pkg.id);
+                    }
+                    updateTotalPrice();
+                    nextButtons.step3.disabled = selectedPackages.length === 0;
+                });
+                
+                const details = document.createElement('div');
+                details.className = 'package-details';
+                
+                const name = document.createElement('div');
+                name.className = 'package-name';
+                name.textContent = pkg.name;
+                
+                const price = document.createElement('div');
+                price.className = 'package-price';
+                price.textContent = `Rp ${pkg.price.toLocaleString('id-ID')}`;
+                
+                details.appendChild(name);
+                details.appendChild(price);
+                packageOption.appendChild(checkbox);
+                packageOption.appendChild(details);
+                packageList.appendChild(packageOption);
+            });
+            
+            packageOptionsContainer.appendChild(packageList);
+        }
+
+        // Update total price display
+        function updateTotalPrice() {
+            orderTotal = selectedPackages.reduce((total, pkg) => total + pkg.price, 0);
+            totalPriceElement.textContent = `Rp ${orderTotal.toLocaleString('id-ID')}`;
+            
+            // Also update summary if we're on step 4
+            if (currentStep === 3) {
+                updateOrderSummary();
+            }
+        }
+
+        // Update order summary in confirmation step
+        function updateOrderSummary() {
+            const fullName = document.getElementById('fullName').value;
+            const communityName = document.getElementById('communityName').value;
+            const whatsappNumber = document.getElementById('whatsappNumber').value;
+            
+            summaryName.textContent = fullName;
+            summaryCommunity.textContent = communityName;
+            summaryWhatsapp.textContent = whatsappNumber;
+            summaryGame.textContent = selectedGame.name;
+            
+            const packageNames = selectedPackages.map(pkg => pkg.name).join(', ');
+            summaryPackages.textContent = packageNames;
+            
+            summaryTotalPrice.textContent = `Rp ${orderTotal.toLocaleString('id-ID')}`;
+        }
+
+        // Start checkout process
+        function startCheckout(e) {
+            e.preventDefault();
+            landingPage.style.display = 'none';
+            document.querySelector('.container').style.display = 'block';
+            goToStep(0);
+        }
+
+        // Go to specific step
+        function goToStep(stepIndex) {
+            // Hide all steps
+            checkoutContainers.forEach(container => {
+                container.style.display = 'none';
+            });
+            
+            // Show current step
+            checkoutContainers[stepIndex].style.display = 'block';
+            currentStep = stepIndex;
+            
+            // Update progress steps
+            updateProgressSteps(stepIndex);
+            
+            // If going to confirmation step, update the summary
+            if (stepIndex === 3) {
+                updateOrderSummary();
+            }
+        }
+
+        // Validate current step and proceed to next
+        function validateAndProceed(step) {
+            let isValid = true;
+            
+            // Step-specific validation
+            if (step === 1) {
+                const fullName = document.getElementById('fullName').value.trim();
+                const communityName = document.getElementById('communityName').value.trim();
+                const whatsappNumber = document.getElementById('whatsappNumber').value.trim();
+                
+                if (!fullName || !communityName || !whatsappNumber) {
+                    isValid = false;
+                    alert('Harap isi semua data diri dengan lengkap');
+                }
+            } else if (step === 2) {
+                if (!selectedGame) {
+                    isValid = false;
+                    alert('Harap pilih game terlebih dahulu');
+                }
+            } else if (step === 3) {
+                if (selectedPackages.length === 0) {
+                    isValid = false;
+                    alert('Harap pilih minimal satu paket');
+                }
+            }
+            
+            if (isValid) {
+                goToStep(step);
+            }
+        }
+
+        // Update progress steps UI
+        function updateProgressSteps(currentStepIndex) {
+            const progressPercentage = (currentStepIndex / (progressSteps.length - 1)) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+            
+            progressSteps.forEach((step, index) => {
+                if (index < currentStepIndex) {
+                    step.classList.add('completed');
+                    step.classList.remove('active');
+                } else if (index === currentStepIndex) {
+                    step.classList.add('active');
+                    step.classList.remove('completed');
+                } else {
+                    step.classList.remove('active', 'completed');
+                }
+            });
+        }
+
+        // Place order via WhatsApp
+        function placeOrder() {
+            if (!agreeTermsCheckbox.checked) {
+                alert('Anda harus menyetujui syarat dan ketentuan terlebih dahulu');
+                return;
+            }
+            
+            const fullName = document.getElementById('fullName').value;
+            const communityName = document.getElementById('communityName').value;
+            const whatsappNumber = document.getElementById('whatsappNumber').value;
+            const packageNames = selectedPackages.map(pkg => pkg.name).join(', ');
+            
+            // Format WhatsApp message
+            const message = `Halo Sabada Organizer, saya ingin melakukan order:
+            
+Nama: ${fullName}
+Komunitas: ${communityName}
+Nomor HP: ${whatsappNumber}
+Game: ${selectedGame.name}
+Paket: ${packageNames}
+Total Harga: Rp ${orderTotal.toLocaleString('id-ID')}
+
+Mohon diproses, terima kasih!`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Create WhatsApp link
+            const whatsappLink = `https://wa.me/6282125301595?text=${encodedMessage}`;
+            
+            // Open in new tab
+            window.open(whatsappLink, '_blank');
+        }
+
+        // Initialize the application
         document.addEventListener('DOMContentLoaded', init);
     </script>
-    
-    <a href="https://wa.me/6282125301595?text=mau order Sabada Organizer kak sora" 
-    target="_blank" 
-    style="
-    position: fixed;
-    bottom: 20px;
-    right: 10px;
-    background-color: white;
-    color: black;
-    padding: 12px 18px;
-    text-decoration: none;
-    border-radius: 50px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    border: 1px solid #ccc;
-    font-weight: bold;
-    z-index: 999;
-">
-   Order Sekarang
-</a>
+
     <a href="https://whatsapp.com/channel/0029Vb6ZMp3Chq6WUhpfAn2v" 
     target="_blank" 
     style="
     position: fixed;
     bottom: 20px;
     left: 10px;
-    background-color: #1de0f4;
+    background-color: #c20b0b;
     color: black;
     padding: 12px 18px;
     text-decoration: none;
