@@ -35,32 +35,6 @@
             padding: 20px;
         }
 
-        /* Header/Landing Page */
-        .landing-page {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
-            color: white;
-            padding: 40px 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .landing-page::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
-            opacity: 0.3;
-        }
-
         .logo {
             font-size: 3rem;
             font-weight: 700;
@@ -476,18 +450,11 @@
                 display: none;
             }
         }
+        
+        
     </style>
 </head>
 <body>
-    <!-- Landing Page -->
-    <section class="landing-page" id="landingPage">
-        <h1 class="logo">Sabada Organizer</h1>
-        <p class="tagline">Jasa Turnamen & Komunitas Game Terbaik!</p>
-        <div>
-            <a href="#" class="btn" id="startCheckout">Pesan Sekarang</a>
-            <p class="tagline">Saran : Kalau Tidak bisa Ditekan Tombolnya Bisa relog, Terus Langsung Tekan Tombol (Harus Cepat!!)</p>
-        </div>
-    </section>
 
     <!-- Checkout Steps Container -->
     <div class="container">
@@ -630,7 +597,6 @@
         </div>
     </div>
 
-
     <script>
         // Game and Package Data
         const gameData = [
@@ -638,60 +604,54 @@
                 id: 'ml',
                 name: 'Mobile Legends',
                 icon: 'fa-mobile-screen',
-                packages: [
-                ]
+                packages: []
             },
             {
                 id: 'bs',
                 name: 'Bloodstrike',
                 icon: 'fa-gun',
                 packages: [
-  { id: 'bs1', name: 'Formulir Pendaftaran Online', price: 1000 },
-  { id: 'bs2', name: 'Data sheet Peserta Terorganisir', price: 2000 },
-  { id: 'bs3', name: 'Rekap Point Peserta Tournament', price: 5000 },
-  { id: 'bs4', name: 'Sistem Eliminasi Bracket web', price: 7000 },
-  { id: 'bs5', name: 'Web Leaderboard Dynamic', price: 17000 },
-  { id: 'bs6', name: 'Template Poster polos', price: 10000 },
-  { id: 'bs7', name: 'Poster Pro+ Branding Event', price: 20000 },
-  { id: 'bs8', name: 'Overlay Lite', price: 15000 },
-  { id: 'bs9', name: 'Overlay Pro+', price: 25000 },
-  { id: 'bs10', name: 'Live Streaming Potrait Mode', price: 3000 },
-  { id: 'bs11', name: 'Live Streaming Landscape Mode', price: 5000 },
-  { id: 'bs12', name: 'E-Certificate polos', price: 10000 },
-  { id: 'bs13', name: 'E-Certificate pro+', price: 15000 },
-  { id: 'bs14', name: 'Tim teknis event/support', price: 5000 },
-  { id: 'bs15', name: 'Overlay Nama Team & Player', price: 20000 }
+                    { id: 'bs1', name: 'Formulir Pendaftaran Online', price: 1000 },
+                    { id: 'bs2', name: 'Data sheet Peserta Terorganisir', price: 2000 },
+                    { id: 'bs3', name: 'Rekap Point Peserta Tournament', price: 5000 },
+                    { id: 'bs4', name: 'Sistem Eliminasi Bracket web', price: 7000 },
+                    { id: 'bs5', name: 'Web Leaderboard Dynamic', price: 17000 },
+                    { id: 'bs6', name: 'Template Poster polos', price: 10000 },
+                    { id: 'bs7', name: 'Poster Pro+ Branding Event', price: 20000 },
+                    { id: 'bs8', name: 'Overlay Lite', price: 15000 },
+                    { id: 'bs9', name: 'Overlay Pro+', price: 25000 },
+                    { id: 'bs10', name: 'Live Streaming Potrait Mode', price: 3000 },
+                    { id: 'bs11', name: 'Live Streaming Landscape Mode', price: 5000 },
+                    { id: 'bs12', name: 'E-Certificate polos', price: 10000 },
+                    { id: 'bs13', name: 'E-Certificate pro+', price: 15000 },
+                    { id: 'bs14', name: 'Tim teknis event/support', price: 5000 },
+                    { id: 'bs15', name: 'Overlay Nama Team & Player', price: 20000 }
                 ]
             },
             {
                 id: 'pubg',
                 name: 'PUBG Mobile',
                 icon: 'fa-person-rifle',
-                packages: [
-                ]
+                packages: []
             },
             {
                 id: 'val',
                 name: 'Valorant',
                 icon: 'fa-crosshairs',
-                packages: [
-                ]
+                packages: []
             },
             {
                 id: 'ff',
                 name: 'Free Fire',
                 icon: 'fa-fire',
-                packages: [
-                ]
+                packages: []
             }
         ];
 
         // DOM Elements
-        const landingPage = document.getElementById('landingPage');
         const checkoutContainers = document.querySelectorAll('.checkout-container');
         const progressSteps = document.querySelectorAll('.step');
         const progressBar = document.getElementById('progressBar');
-        const startCheckoutBtn = document.getElementById('startCheckout');
         const nextButtons = {
             step1: document.getElementById('nextToStep2'),
             step2: document.getElementById('nextToStep3'),
@@ -706,7 +666,6 @@
         const agreeTermsCheckbox = document.getElementById('agreeTerms');
         const gameOptionsContainer = document.getElementById('gameOptions');
         const packageOptionsContainer = document.getElementById('packageOptions');
-        const priceSummaryContainer = document.getElementById('priceSummary');
         const totalPriceElement = document.getElementById('totalPrice');
         
         // Summary elements
@@ -723,45 +682,31 @@
         let selectedPackages = [];
         let orderTotal = 0;
 
-        // Initialize the page
+        // Initialize the application
         function init() {
-            // Hide all checkout containers initially
-            checkoutContainers.forEach(container => {
-                container.style.display = 'none';
-            });
+            // Show first step
+            document.getElementById('step1').style.display = 'block';
+            
+            // Inisialisasi progress steps
+            updateProgressSteps(0);
+
+            // Hide other steps
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step3').style.display = 'none';
+            document.getElementById('step4').style.display = 'none';
 
             // Populate game options
             renderGameOptions();
 
             // Event listeners
-            // Ganti dengan ini:
-document.getElementById('startCheckout').onclick = function(e) {
-    e.preventDefault();
-    
-    // Langsung tampilkan form pertama
-    document.getElementById('landingPage').style.display = 'none';
-    document.getElementById('step1').style.display = 'block';
-    document.querySelector('.container').style.display = 'block';
-    
-    // Update progress bar
-    document.querySelector('.progress-bar').style.width = '0%';
-    document.querySelectorAll('.step').forEach((step, index) => {
-        step.classList.toggle('active', index === 0);
-        step.classList.remove('completed');
-    });
-};
-            
-            // Next button listeners
             nextButtons.step1.addEventListener('click', () => validateAndProceed(1));
             nextButtons.step2.addEventListener('click', () => validateAndProceed(2));
             nextButtons.step3.addEventListener('click', () => validateAndProceed(3));
             
-            // Previous button listeners
             prevButtons.step1.addEventListener('click', () => goToStep(0));
             prevButtons.step2.addEventListener('click', () => goToStep(1));
             prevButtons.step3.addEventListener('click', () => goToStep(2));
             
-            // Place order button
             placeOrderBtn.addEventListener('click', placeOrder);
             agreeTermsCheckbox.addEventListener('change', () => {
                 placeOrderBtn.disabled = !agreeTermsCheckbox.checked;
@@ -889,14 +834,6 @@ document.getElementById('startCheckout').onclick = function(e) {
             summaryTotalPrice.textContent = `Rp ${orderTotal.toLocaleString('id-ID')}`;
         }
 
-        // Start checkout process
-        function startCheckout(e) {
-            e.preventDefault();
-            landingPage.style.display = 'none';
-            document.querySelector('.container').style.display = 'block';
-            goToStep(0);
-        }
-
         // Go to specific step
         function goToStep(stepIndex) {
             // Hide all steps
@@ -1000,27 +937,28 @@ Mohon diproses, terima kasih!`;
             window.open(whatsappLink, '_blank');
         }
 
-        // Initialize the application
+        // Initialize the application when DOM is loaded
         document.addEventListener('DOMContentLoaded', init);
     </script>
 
     <a href="https://whatsapp.com/channel/0029Vb6ZMp3Chq6WUhpfAn2v" 
-    target="_blank" 
-    style="
-    position: fixed;
-    bottom: 20px;
-    left: 10px;
-    background-color: #c20b0b;
-    color: black;
-    padding: 12px 18px;
-    text-decoration: none;
-    border-radius: 50px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    border: 1px solid #ccc;
-    font-weight: bold;
-    z-index: 999;
-">
-   Gabung Saluran whatsapp
-</a>
+       target="_blank" 
+       style="
+           position: fixed;
+           bottom: 20px;
+           left: 10px;
+           background-color: #c20b0b;
+           color: black;
+           padding: 12px 18px;
+           text-decoration: none;
+           border-radius: 50px;
+           box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+           border: 1px solid #ccc;
+           font-weight: bold;
+           z-index: 999;
+       ">
+       Gabung Saluran whatsapp
+    </a>
+
 </body>
 </html>
