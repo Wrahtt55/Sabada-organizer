@@ -646,7 +646,7 @@
                 name: 'Bloodstrike',
                 icon: 'fa-gun',
                 packages: [
-    { id: 'bs1', name: 'Formulir Pendaftaran Online', price: 1000 },
+  { id: 'bs1', name: 'Formulir Pendaftaran Online', price: 1000 },
   { id: 'bs2', name: 'Data sheet Peserta Terorganisir', price: 2000 },
   { id: 'bs3', name: 'Rekap Point Peserta Tournament', price: 5000 },
   { id: 'bs4', name: 'Sistem Eliminasi Bracket web', price: 7000 },
@@ -734,7 +734,22 @@
             renderGameOptions();
 
             // Event listeners
-            startCheckoutBtn.addEventListener('click', startCheckout);
+            // Ganti dengan ini:
+document.getElementById('startCheckout').onclick = function(e) {
+    e.preventDefault();
+    
+    // Langsung tampilkan form pertama
+    document.getElementById('landingPage').style.display = 'none';
+    document.getElementById('step1').style.display = 'block';
+    document.querySelector('.container').style.display = 'block';
+    
+    // Update progress bar
+    document.querySelector('.progress-bar').style.width = '0%';
+    document.querySelectorAll('.step').forEach((step, index) => {
+        step.classList.toggle('active', index === 0);
+        step.classList.remove('completed');
+    });
+};
             
             // Next button listeners
             nextButtons.step1.addEventListener('click', () => validateAndProceed(1));
