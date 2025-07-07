@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sabada Organizer - Jasa Turnamen & Komunitas Game Terbaik</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Form Pengajuan Jasa EO</title>
     <style>
         :root {
-            --primary: #e63946;
-            --primary-dark: #c1121f;
-            --dark: #1a1a1a;
-            --light: #f8f9fa;
-            --gray: #6c757d;
-            --success: #2a9d8f;
+            --primary-color: #4a6bff;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ff6b6b;
+            --text-color: #333;
+            --light-text: #6c757d;
+            --border-color: #dee2e6;
+            --success-color: #28a745;
         }
 
         * {
@@ -23,957 +23,993 @@
         }
 
         body {
-            background-color: #f5f5f5;
-            color: var(--dark);
-            min-height: 100vh;
-            overflow-x: hidden;
+            background-color: #f5f7ff;
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .logo {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: white;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            animation: fadeInDown 1s ease;
-        }
-
-        .tagline {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
             max-width: 800px;
-            line-height: 1.6;
-            animation: fadeIn 1.5s ease;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
-            margin: 10px;
-            animation: fadeInUp 1s ease;
-        }
-
-        .btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.6);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid white;
-            box-shadow: none;
-        }
-
-        .btn-outline:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Checkout Steps */
-        .checkout-container {
-            display: none;
-            background-color: white;
-            border-radius: 10px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            margin: 40px auto;
-            max-width: 800px;
-            transform: translateY(20px);
-            opacity: 0;
-            animation: fadeInUp 0.5s ease forwards;
+            animation: fadeIn 0.5s ease-out;
         }
 
-        .step-header {
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: var(--primary-color);
             text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .step-title {
+            margin-bottom: 1rem;
             font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 10px;
         }
 
-        .step-subtitle {
-            color: var(--gray);
-            font-size: 1rem;
+        .description {
+            text-align: center;
+            color: var(--light-text);
+            margin-bottom: 2rem;
+        }
+
+        .form-step {
+            display: none;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .form-step.active {
+            display: block;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 1.5rem;
         }
 
-        .form-label {
+        label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
             font-weight: 600;
-            color: var(--dark);
+            color: var(--text-color);
         }
 
-        .form-control {
+        .required::after {
+            content: " *";
+            color: var(--accent-color);
+        }
+
+        input, select, textarea {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: border 0.3s, box-shadow 0.3s;
         }
 
-        .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2);
+        input:focus, select:focus, textarea:focus {
             outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
         }
 
-        /* Game Selection */
-        .game-options {
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #3a5bef;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #e9ecef;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .game-categories {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .game-option {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .game-option input {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
         .game-card {
-            background-color: white;
-            border: 2px solid #eee;
-            border-radius: 10px;
-            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
             text-align: center;
-            transition: all 0.3s ease;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
         .game-card:hover {
-            border-color: var(--primary);
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .game-option input:checked + .game-card {
-            border-color: var(--primary);
-            background-color: rgba(230, 57, 70, 0.05);
+        .game-card.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(74, 107, 255, 0.05);
         }
 
-        .game-icon {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: var(--primary);
+        .game-card img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
         }
 
-        .game-name {
-            font-weight: 600;
-            font-size: 1rem;
+        .service-options {
+            margin-top: 1rem;
         }
 
-        /* Package Selection */
-        .package-options {
-            margin-top: 20px;
-        }
-
-        .package-option {
+        .service-item {
             display: flex;
             align-items: center;
-            padding: 15px;
-            border: 1px solid #eee;
+            margin-bottom: 0.75rem;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
         }
 
-        .package-option:hover {
-            border-color: var(--primary);
+        .service-item input[type="checkbox"], 
+        .service-item input[type="radio"] {
+            width: auto;
+            margin-right: 1rem;
         }
 
-        .package-checkbox {
-            margin-right: 15px;
-            transform: scale(1.2);
-        }
-
-        .package-details {
+        .service-item label {
+            margin-bottom: 0;
             flex-grow: 1;
         }
 
-        .package-name {
+        .service-price {
+            color: var(--primary-color);
             font-weight: 600;
-            margin-bottom: 5px;
         }
 
-        .package-price {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 1.1rem;
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
-        /* Terms and Conditions */
+        .payment-method {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-method:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .payment-method.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(74, 107, 255, 0.05);
+        }
+
+        .payment-method img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+        }
+
         .terms-container {
             max-height: 300px;
             overflow-y: auto;
-            padding: 15px;
-            border: 1px solid #eee;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            margin-bottom: 20px;
-            background-color: #f9f9f9;
+            margin-bottom: 1rem;
+            background-color: var(--secondary-color);
         }
 
-        .terms-title {
-            font-weight: 700;
-            margin-bottom: 10px;
+        .terms-container p {
+            margin-bottom: 1rem;
         }
 
-        .terms-content {
-            line-height: 1.6;
-            font-size: 0.9rem;
-        }
-
-        /* Navigation Buttons */
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-
-        .btn-prev {
-            background-color: var(--gray);
-            box-shadow: none;
-        }
-
-        .btn-prev:hover {
-            background-color: #5a6268;
-        }
-
-        .btn-next {
-            margin-left: auto;
-        }
-
-        /* Summary */
-        .summary-container {
-            background-color: #f9f9f9;
+        .total-display {
+            background-color: rgba(40, 167, 69, 0.1);
+            padding: 1rem;
             border-radius: 8px;
-            padding: 20px;
-            margin-top: 30px;
-        }
-
-        .summary-title {
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .summary-label {
-            font-weight: 600;
-        }
-
-        .total-price {
+            margin-top: 1rem;
+            text-align: center;
             font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #eee;
+            font-weight: 600;
+            color: var(--success-color);
+            animation: pulse 2s infinite;
         }
 
-        /* Progress Steps */
-        .progress-steps {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .progress-steps::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background-color: #eee;
-            z-index: 1;
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
         }
 
         .progress-bar {
-            position: absolute;
-            top: 15px;
-            left: 0;
-            height: 2px;
-            background-color: var(--primary);
-            z-index: 2;
-            transition: width 0.4s ease;
+            height: 8px;
+            background-color: var(--secondary-color);
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            position: relative;
         }
 
         .step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 3;
-        }
-
-        .step-number {
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background-color: #eee;
-            color: var(--gray);
+            background-color: var(--secondary-color);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 600;
-            margin-bottom: 5px;
-            transition: all 0.3s ease;
+            color: var(--light-text);
+            position: relative;
+            z-index: 2;
+            border: 2px solid var(--secondary-color);
         }
 
-        .step.active .step-number {
-            background-color: var(--primary);
+        .step.active {
+            background-color: var(--primary-color);
             color: white;
+            border-color: var(--primary-color);
         }
 
-        .step.completed .step-number {
-            background-color: var(--success);
+        .step.completed {
+            background-color: var(--success-color);
             color: white;
+            border-color: var(--success-color);
         }
 
-        .step-label {
-            font-size: 0.8rem;
-            color: var(--gray);
-            text-align: center;
+        .step-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transform: translateY(-50%);
+            z-index: 1;
         }
 
-        .step.active .step-label {
-            color: var(--primary);
-            font-weight: 600;
+        .step-line-progress {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transform: translateY(-50%);
+            z-index: 1;
+            transition: width 0.5s ease;
         }
 
-        .step.completed .step-label {
-            color: var(--success);
+        .error-message {
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .input-error {
+            border-color: var(--accent-color) !important;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .input-error + .error-message {
+            display: block;
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .hidden {
+            display: none;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .game-options {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            .container {
+                margin: 1rem;
+                padding: 1.5rem;
             }
 
-            .checkout-container {
-                padding: 20px;
-            }
-
-            .step-title {
-                font-size: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .game-options {
+            .game-categories, .payment-methods {
                 grid-template-columns: repeat(2, 1fr);
             }
-
-            .nav-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                margin: 5px 0;
-            }
-
-            .progress-steps {
-                margin-bottom: 30px;
-            }
-
-            .step-label {
-                display: none;
-            }
         }
-        
-        
     </style>
 </head>
 <body>
-
-    <!-- Checkout Steps Container -->
     <div class="container">
-        <!-- Progress Steps -->
-        <div class="progress-steps" id="progressSteps">
-            <div class="progress-bar" id="progressBar"></div>
-            <div class="step active" data-step="1">
-                <div class="step-number">1</div>
-                <div class="step-label">Data Diri</div>
-            </div>
-            <div class="step" data-step="2">
-                <div class="step-number">2</div>
-                <div class="step-label">Pilih Game</div>
-            </div>
-            <div class="step" data-step="3">
-                <div class="step-number">3</div>
-                <div class="step-label">Pilih Paket</div>
-            </div>
-            <div class="step" data-step="4">
-                <div class="step-number">4</div>
-                <div class="step-label">Konfirmasi</div>
-            </div>
+        <h1>SABADA ORGANIZER</h1>
+        <p class="description">Silakan isi data diri Anda untuk melanjutkan pengajuan jasa.</p>
+
+        <div class="step-indicator">
+            <div class="step-line"></div>
+            <div class="step-line-progress" id="stepLineProgress"></div>
+            <div class="step active" id="step1">1</div>
+            <div class="step" id="step2">2</div>
+            <div class="step" id="step3">3</div>
+            <div class="step" id="step4">4</div>
+            <div class="step" id="step5">5</div>
+            <div class="step" id="step6">6</div>
         </div>
 
-        <!-- Step 1: Personal Data -->
-        <div class="checkout-container" id="step1">
-            <div class="step-header">
-                <h2 class="step-title">Data Diri</h2>
-                <p class="step-subtitle">Isi data diri Anda untuk memulai pesanan</p>
-            </div>
-            <form id="personalDataForm">
-                <div class="form-group">
-                    <label for="fullName" class="form-label">Nama Lengkap</label>
-                    <input type="text" id="fullName" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="communityName" class="form-label">Nama Komunitas</label>
-                    <input type="text" id="communityName" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="whatsappNumber" class="form-label">Nomor WhatsApp Aktif</label>
-                    <input type="tel" id="whatsappNumber" class="form-control" required>
-                </div>
-                <div class="nav-buttons">
-                    <button type="button" class="btn btn-prev" disabled>Sebelumnya</button>
-                    <button type="button" class="btn btn-next" id="nextToStep2">Selanjutnya</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Step 2: Game Selection -->
-        <div class="checkout-container" id="step2">
-            <div class="step-header">
-                <h2 class="step-title">Pilih Kategori Game</h2>
-                <p class="step-subtitle">Pilih game yang ingin Anda adakan turnamennya</p>
-            </div>
-            <div class="game-options" id="gameOptions">
-                <!-- Game options will be populated by JavaScript -->
-            </div>
-            <div class="nav-buttons">
-                <button type="button" class="btn btn-prev" id="prevToStep1">Sebelumnya</button>
-                <button type="button" class="btn btn-next" id="nextToStep3" disabled>Selanjutnya</button>
-            </div>
-        </div>
-
-        <!-- Step 3: Package Selection -->
-        <div class="checkout-container" id="step3">
-            <div class="step-header">
-                <h2 class="step-title">Pilih Paket Turnamen</h2>
-                <p class="step-subtitle">Pilih paket yang sesuai dengan kebutuhan Anda</p>
-            </div>
-            <div id="packageOptions">
-                <!-- Package options will be populated by JavaScript based on selected game -->
-                <p class="text-center">Silakan pilih game terlebih dahulu</p>
-            </div>
-            <div class="summary-container" id="priceSummary">
-                <div class="summary-title">Ringkasan Pesanan</div>
-                <div class="summary-item">
-                    <span class="summary-label">Total:</span>
-                    <span class="summary-value" id="totalPrice">Rp 0</span>
-                </div>
-            </div>
-            <div class="nav-buttons">
-                <button type="button" class="btn btn-prev" id="prevToStep2">Sebelumnya</button>
-                <button type="button" class="btn btn-next" id="nextToStep4" disabled>Selanjutnya</button>
-            </div>
-        </div>
-
-        <!-- Step 4: Confirmation -->
-        <div class="checkout-container" id="step4">
-            <div class="step-header">
-                <h2 class="step-title">Konfirmasi Pesanan</h2>
-                <p class="step-subtitle">Tinjau pesanan Anda sebelum mengirim</p>
-            </div>
-            <div class="summary-container">
-                <div class="summary-title">Detail Pesanan</div>
-                <div class="summary-item">
-                    <span class="summary-label">Nama:</span>
-                    <span class="summary-value" id="summaryName"></span>
-                </div>
-                <div class="summary-item">
-                    <span class="summary-label">Komunitas:</span>
-                    <span class="summary-value" id="summaryCommunity"></span>
-                </div>
-                <div class="summary-item">
-                    <span class="summary-label">Nomor WhatsApp:</span>
-                    <span class="summary-value" id="summaryWhatsapp"></span>
-                </div>
-                <div class="summary-item">
-                    <span class="summary-label">Game:</span>
-                    <span class="summary-value" id="summaryGame"></span>
-                </div>
-                <div class="summary-item">
-                    <span class="summary-label">Paket:</span>
-                    <span class="summary-value" id="summaryPackages"></span>
-                </div>
-                <div class="total-price">
-                    Total Harga: <span id="summaryTotalPrice">Rp 0</span>
-                </div>
-            </div>
-            <div class="terms-container">
-                <div class="terms-title">Syarat & Ketentuan</div>
-                <div class="terms-content">
-                    <p>1. Dengan melakukan pemesanan, Anda menyetujui semua syarat dan ketentuan yang berlaku.</p>
-                    <p>2. Pembayaran dilakukan setelah konfirmasi dari admin Sabada Organizer.</p>
-                    <p>3. Pesanan dapat dibatalkan maksimal 24 jam sebelum pelaksanaan turnamen.</p>
-                    <p>4. Sabada Organizer berhak membatalkan pesanan jika terdapat indikasi penipuan.</p>
-                    <p>5. Semua data yang diberikan akan dijaga kerahasiaannya.</p>
-                    <p>6. Untuk pertanyaan lebih lanjut, silakan hubungi admin kami.</p>
-                </div>
+        <!-- Step 1: Data Diri -->
+        <div class="form-step active" id="step1Form">
+            <div class="form-group">
+                <label for="fullName" class="required">Nama Lengkap</label>
+                <input type="text" id="fullName" placeholder="Masukkan nama lengkap Anda">
+                <span class="error-message">Nama lengkap wajib diisi</span>
             </div>
             <div class="form-group">
-                <input type="checkbox" id="agreeTerms" class="package-checkbox">
-                <label for="agreeTerms">Saya setuju dengan syarat & ketentuan</label>
+                <label for="communityName" class="required">Nama Komunitas</label>
+                <input type="text" id="communityName" placeholder="Masukkan nama komunitas">
+                <span class="error-message">Nama komunitas wajib diisi</span>
             </div>
-            <div class="nav-buttons">
-                <button type="button" class="btn btn-prev" id="prevToStep3">Sebelumnya</button>
-                <button type="button" class="btn" id="placeOrder" disabled>Order via WhatsApp</button>
+            <div class="form-group">
+                <label for="whatsappNumber" class="required">Nomor WhatsApp</label>
+                <input type="tel" id="whatsappNumber" placeholder="Contoh: 081234567890">
+                <span class="error-message">Nomor WhatsApp wajib diisi dan valid</span>
             </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" disabled>Sebelumnya</button>
+                <button class="btn btn-primary" id="next1">Lanjutkan</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Detail Kegiatan -->
+        <div class="form-step" id="step2Form">
+            <div class="form-group">
+                <label for="eventDuration" class="required">Durasi Event</label>
+                <select id="eventDuration">
+                    <option value="" disabled selected>Pilih durasi event</option>
+                    <!-- Options will be filled by JavaScript -->
+                </select>
+                <span class="error-message">Durasi event wajib dipilih</span>
+            </div>
+            <div class="form-group">
+                <label for="eventDate" class="required">Tanggal Pelaksanaan</label>
+                <input type="date" id="eventDate">
+                <span class="error-message">Tanggal pelaksanaan wajib diisi</span>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" id="prev2">Sebelumnya</button>
+                <button class="btn btn-primary" id="next2">Lanjutkan</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Pilih Kategori Game -->
+        <div class="form-step" id="step3Form">
+            <div class="form-group">
+                <label class="required">Pilih Kategori Game</label>
+                <div class="game-categories" id="gameCategories">
+                    <!-- Game cards will be filled by JavaScript -->
+                </div>
+                <span class="error-message" id="gameError">Pilih salah satu kategori game</span>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" id="prev3">Sebelumnya</button>
+                <button class="btn btn-primary" id="next3">Lanjutkan</button>
+            </div>
+        </div>
+
+        <!-- Step 4: Pilih Jasa EO -->
+        <div class="form-step" id="step4Form">
+            <div class="form-group">
+                <label>Pilih Jasa EO</label>
+                <div class="service-options" id="serviceOptions">
+                    <!-- Service options will be filled by JavaScript -->
+                </div>
+                <!-- Ganti bagian ini di step 4 (Pilih Jasa EO) -->
+<div class="form-group">
+    <label>Jasa EO Lainnya</label>
+    <div class="service-options">
+<div class="service-item">
+    <input type="checkbox" id="bs1" data-price="1000">
+    <label for="bs1">
+        <strong>Formulir Pendaftaran Online</strong> - Formulir digital pendaftaran peserta
+        <span class="service-price">(Rp 1.000)</span>
+    </label>
+</div>
+<div class="service-item">
+    <input type="checkbox" id="bs2" data-price="2000">
+    <label for="bs2">
+        <strong>Data sheet Peserta Terorganisir</strong> - Data peserta dalam format rapi
+        <span class="service-price">(Rp 2.000)</span>
+    </label>
+</div>
+<div class="service-item">
+    <input type="checkbox" id="bs3" data-price="5000">
+    <label for="bs3">
+        <strong>Rekap Point Peserta Tournament</strong> - Rekap nilai peserta turnamen
+        <span class="service-price">(Rp 5.000)</span>
+    </label>
+</div>
+<div class="service-item">
+    <input type="checkbox" id="bs4" data-price="7000">
+    <label for="bs4">
+        <strong>Sistem Eliminasi Bracket web</strong> - Bracket eliminasi otomatis via web
+        <span class="service-price">(Rp 7.000)</span>
+    </label>
+</div>
+<div class="service-item">
+    <input type="checkbox" id="bs5" data-price="17000">
+    <label for="bs5">
+        <strong>Web Leaderboard Dynamic</strong> - Leaderboard live dan interaktif
+        <span class="service-price">(Rp 17.000)</span>
+    </label>
+</div>
+<div class="service-item">
+    <input type="checkbox" id="bs6" data-price="10000">
+    <label for="bs6">
+        <strong>Template Poster polos</strong> - Template poster dasar siap edit
+        <span class="service-price">(Rp 10.000)</span>
+    </label>
+</div>
+<div class="service-item">
+    <input type="checkbox" id="bs7" data-price="20000">
+    <label for="bs7">
+        <strong>Poster Pro+ Branding Event</strong> - Poster premium branding event
+        <span class="service-price">(Rp 20.000)</span>
+    </label>
+</div>
+<div class="service-item">
+    <input type="checkbox" id="bs8" data-price="15000">
+    <label for="bs8">
+        <strong>Overlay Lite</strong> - Overlay sederhana untuk live atau konten
+        <span class="service-price">(Rp 15.000)</span>
+    </label>
+</div>
+<div class="service-item">
+    <input type="checkbox" id="bs9" data-price="25000">
+    <label for="bs9">
+        <strong>Overlay Pro+</strong> - Overlay profesional siap pakai
+        <span class="service-price">(Rp 25.000)</span>
+    </label>
+</div>
+<div class="service-item">
+    <input type="checkbox" id="bs12" data-price="10000">
+    <label for="bs12">
+        <strong>E-Certificate polos</strong> - Sertifikat digital sederhana
+        <span class="service-price">(Rp 10.000)</span>
+    </label>
+</div>
+<div class="service-item">
+    <input type="checkbox" id="bs13" data-price="15000">
+    <label for="bs13">
+        <strong>E-Certificate pro+</strong> - Sertifikat digital premium
+        <span class="service-price">(Rp 15.000)</span>
+    </label>
+</div>
+<div class="service-item">
+    <input type="checkbox" id="bs14" data-price="5000">
+    <label for="bs14">
+        <strong>Tim teknis event/support</strong> - Bantuan teknis saat event berlangsung
+        <span class="service-price">(Rp 5.000)</span>
+    </label>
+</div>
+<div class="service-item">
+    <input type="checkbox" id="bs15" data-price="20000">
+    <label for="bs15">
+        <strong>Overlay Nama Team & Player</strong> - Overlay khusus nama tim & player
+        <span class="service-price">(Rp 20.000)</span>
+    </label>
+</div>
+    </div>
+</div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" id="prev4">Sebelumnya</button>
+                <button class="btn btn-primary" id="next4">Lanjutkan ke Pembayaran</button>
+            </div>
+        </div>
+
+        <!-- Step 5: Metode Pembayaran -->
+        <div class="form-step" id="step5Form">
+            <div class="form-group">
+                <label class="required">Pilih Metode Pembayaran</label>
+                <div class="payment-methods" id="paymentMethods">
+                    <!-- Payment methods will be filled by JavaScript -->
+                </div>
+                <span class="error-message" id="paymentError">Pilih metode pembayaran</span>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" id="prev5">Sebelumnya</button>
+                <button class="btn btn-primary" id="next5">Lanjutkan</button>
+            </div>
+        </div>
+
+        <!-- Step 6: Syarat & Ketentuan -->
+        <div class="form-step" id="step6Form">
+            <div class="form-group">
+                <label class="required">Syarat & Ketentuan</label>
+                <div class="terms-container" id="termsContainer">
+                    <h3>Syarat dan Ketentuan Pengajuan Jasa EO</h3>
+                    <p>1. Dengan mengisi formulir ini, Anda menyetujui semua syarat dan ketentuan yang berlaku.</p>
+                    <p>2. Pembayaran harus dilakukan dalam waktu 24 jam setelah pengajuan untuk memastikan slot tersedia.</p>
+                    <p>3. Pembatalan setelah pembayaran akan dikenakan biaya administrasi sebesar 30% dari total biaya.</p>
+                    <p>4. Perubahan jadwal pelaksanaan event harus diberitahukan minimal 7 hari sebelum tanggal pelaksanaan.</p>
+                    <p>5. EO berhak menolak permintaan yang melanggar peraturan platform game yang bersangkutan.</p>
+                    <p>6. Semua konten yang disiarkan harus sesuai dengan pedoman komunitas dan tidak mengandung materi yang melanggar hak cipta.</p>
+                    <p>7. Biaya tambahan mungkin berlaku untuk permintaan khusus di luar paket standar.</p>
+                    <p>8. Semua pembayaran bersifat final dan tidak dapat dikembalikan kecuali ada pembatalan dari pihak EO.</p>
+                    <p>9. Waktu respon admin adalah pada jam operasional (05.00 - 21.00 WIB).</p>
+                    <p>10. Dengan mencentang kotak persetujuan, Anda mengakui bahwa telah membaca dan memahami semua syarat dan ketentuan ini.</p>
+                </div>
+                <div class="form-group">
+                    <div class="service-item">
+                        <input type="checkbox" id="agreeTerms">
+                        <label for="agreeTerms">Saya menerima Syarat & Ketentuan yang berlaku.</label>
+                    </div>
+                    <span class="error-message" id="termsError">Anda harus menyetujui syarat dan ketentuan</span>
+                </div>
+            </div>
+<!-- Ganti ini di step 6 -->
+<div class="btn-group">
+    <button class="btn btn-secondary" id="prev6">Sebelumnya</button>
+    <button class="btn btn-primary" id="submitForm">Kirim Pengajuan</button>
+</div>
         </div>
     </div>
 
     <script>
-        // Game and Package Data
-        const gameData = [
-            {
-                id: 'ml',
-                name: 'Mobile Legends',
-                icon: 'fa-mobile-screen',
-                packages: []
-            },
-            {
-                id: 'bs',
-                name: 'Bloodstrike',
-                icon: 'fa-gun',
-                packages: [
-                    { id: 'bs1', name: 'Formulir Pendaftaran Online', price: 1000 },
-                    { id: 'bs2', name: 'Data sheet Peserta Terorganisir', price: 2000 },
-                    { id: 'bs3', name: 'Rekap Point Peserta Tournament', price: 5000 },
-                    { id: 'bs4', name: 'Sistem Eliminasi Bracket web', price: 7000 },
-                    { id: 'bs5', name: 'Web Leaderboard Dynamic', price: 17000 },
-                    { id: 'bs6', name: 'Template Poster polos', price: 10000 },
-                    { id: 'bs7', name: 'Poster Pro+ Branding Event', price: 20000 },
-                    { id: 'bs8', name: 'Overlay Lite', price: 15000 },
-                    { id: 'bs9', name: 'Overlay Pro+', price: 25000 },
-                    { id: 'bs10', name: 'Live Streaming Potrait Mode', price: 3000 },
-                    { id: 'bs11', name: 'Live Streaming Landscape Mode', price: 5000 },
-                    { id: 'bs12', name: 'E-Certificate polos', price: 10000 },
-                    { id: 'bs13', name: 'E-Certificate pro+', price: 15000 },
-                    { id: 'bs14', name: 'Tim teknis event/support', price: 5000 },
-                    { id: 'bs15', name: 'Overlay Nama Team & Player', price: 20000 }
+        // Data JSON untuk game, layanan, dan metode pembayaran
+        const formData = {
+            games: [
+                { id: 'bloodstrike', name: 'Bloodstrike', icon: '🎯' },
+                { id: 'roblox', name: 'Roblox', icon: '🧱' },
+                { id: 'gta', name: 'GTA', icon: '🚗' },
+                { id: 'mobile-legends', name: 'Mobile Legends', icon: '⚔️' }
+            ],
+            services: {
+                'bloodstrike': [
+                    { id: 'landscape', name: 'Live landscape', price: 5000, description: 'Terhitung harga × jumlah hari', type: 'checkbox' },
+                    { id: 'portrait', name: 'Live Portrait', price: 3000, description: 'Terhitung harga × jumlah hari', type: 'checkbox' }
+                ],
+                'roblox': [
+                    { id: 'live-stream', name: 'Live Stream', price: 450000, description: 'Prioritas, tidak wajib', type: 'checkbox' },
+                    { id: 'landscape', name: 'Landscape', price: 250000, description: 'Terhitung harga × jumlah hari', type: 'checkbox' },
+                    { id: 'custom-server', name: 'Custom Server', price: 400000, description: 'Setup server khusus', type: 'checkbox' }
+                ],
+                'gta': [
+                    { id: 'live-stream', name: 'Live Stream', price: 600000, description: 'Prioritas, tidak wajib', type: 'checkbox' },
+                    { id: 'multi-angle', name: 'Multi Angle', price: 400000, description: 'Beberapa sudut kamera', type: 'checkbox' },
+                    { id: 'mod-support', name: 'Mod Support', price: 350000, description: 'Dukungan mod khusus', type: 'checkbox' }
+                ],
+                'mobile-legends': [
+                    { id: 'live-stream', name: 'Live Stream', price: 550000, description: 'Prioritas, tidak wajib', type: 'checkbox' },
+                    { id: 'commentary', name: 'Komentator', price: 300000, description: 'Komentator profesional', type: 'checkbox' },
+                    { id: 'replay', name: 'Replay Highlight', price: 200000, description: 'Pembuatan replay', type: 'checkbox' }
                 ]
             },
-            {
-                id: 'pubg',
-                name: 'PUBG Mobile',
-                icon: 'fa-person-rifle',
-                packages: [
-{ id: 'pubg1', name: 'Formulir Pendaftaran Online', price: 1000 },
-                    { id: 'pubg2', name: 'Data sheet Peserta Terorganisir', price: 2000 },
-                    { id: 'bs3', name: 'Rekap Point Peserta Tournament', price: 5000 },
-                    { id: 'bs4', name: 'Sistem Eliminasi Bracket web', price: 7000 },
-                    { id: 'bs5', name: 'Web Leaderboard Dynamic', price: 17000 },
-                    { id: 'bs6', name: 'Template Poster polos', price: 10000 },
-                    { id: 'bs7', name: 'Poster Pro+ Branding Event', price: 20000 },
-                    { id: 'bs8', name: 'Overlay Lite', price: 15000 },
-                    { id: 'bs9', name: 'Overlay Pro+', price: 25000 },
-                    { id: 'bs10', name: 'Live Streaming Potrait Mode', price: 3000 },
-                    { id: 'bs11', name: 'Live Streaming Landscape Mode', price: 5000 },
-                    { id: 'bs12', name: 'E-Certificate polos', price: 10000 },
-                    { id: 'bs13', name: 'E-Certificate pro+', price: 15000 },
-                    { id: 'bs14', name: 'Tim teknis event/support', price: 5000 },
-                    { id: 'bs15', name: 'Overlay Nama Team & Player', price: 20000 }]
-            },
-            {
-                id: 'val',
-                name: 'Valorant',
-                icon: 'fa-crosshairs',
-                packages: []
-            },
-            {
-                id: 'ff',
-                name: 'Free Fire',
-                icon: 'fa-fire',
-                packages: []
+            paymentMethods: [
+                { id: 'dana', name: 'Dana', icon: '💳' },
+                { id: 'ovo', name: 'OVO', icon: '📱' },
+                { id: 'gopay', name: 'GoPay', icon: '🛵' },
+                { id: 'qris', name: 'QRIS', icon: '🔳' }
+            ],
+            adminNumbers: {
+                shift1: '6288991734780',  // Ganti dengan nomor shift 1
+                shift2: '6288991734780'   // Ganti dengan nomor kamu
             }
-        ];
-
-        // DOM Elements
-        const checkoutContainers = document.querySelectorAll('.checkout-container');
-        const progressSteps = document.querySelectorAll('.step');
-        const progressBar = document.getElementById('progressBar');
-        const nextButtons = {
-            step1: document.getElementById('nextToStep2'),
-            step2: document.getElementById('nextToStep3'),
-            step3: document.getElementById('nextToStep4')
         };
-        const prevButtons = {
-            step1: document.getElementById('prevToStep1'),
-            step2: document.getElementById('prevToStep2'),
-            step3: document.getElementById('prevToStep3')
-        };
-        const placeOrderBtn = document.getElementById('placeOrder');
-        const agreeTermsCheckbox = document.getElementById('agreeTerms');
-        const gameOptionsContainer = document.getElementById('gameOptions');
-        const packageOptionsContainer = document.getElementById('packageOptions');
-        const totalPriceElement = document.getElementById('totalPrice');
-        
-        // Summary elements
-        const summaryName = document.getElementById('summaryName');
-        const summaryCommunity = document.getElementById('summaryCommunity');
-        const summaryWhatsapp = document.getElementById('summaryWhatsapp');
-        const summaryGame = document.getElementById('summaryGame');
-        const summaryPackages = document.getElementById('summaryPackages');
-        const summaryTotalPrice = document.getElementById('summaryTotalPrice');
 
-        // State variables
-        let currentStep = 0;
+        // Variabel state form
+        let currentStep = 1;
+        const totalSteps = 6;
         let selectedGame = null;
-        let selectedPackages = [];
-        let orderTotal = 0;
+        let selectedServices = [];
+        let selectedPaymentMethod = null;
+        let eventDuration = 0;
 
-        // Initialize the application
-        function init() {
-            // Show first step
-            document.getElementById('step1').style.display = 'block';
-            
-            // Inisialisasi progress steps
-            updateProgressSteps(0);
+        // Inisialisasi form saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            // Isi dropdown durasi event
+            const durationSelect = document.getElementById('eventDuration');
+            for (let i = 1; i <= 30; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `${i} hari`;
+                durationSelect.appendChild(option);
+            }
 
-            // Hide other steps
-            document.getElementById('step2').style.display = 'none';
-            document.getElementById('step3').style.display = 'none';
-            document.getElementById('step4').style.display = 'none';
+            // Set tanggal minimum ke hari ini
+            const today = new Date();
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
+            document.getElementById('eventDate').min = `${yyyy}-${mm}-${dd}`;
 
-            // Populate game options
-            renderGameOptions();
-
-            // Event listeners
-            nextButtons.step1.addEventListener('click', () => validateAndProceed(1));
-            nextButtons.step2.addEventListener('click', () => validateAndProceed(2));
-            nextButtons.step3.addEventListener('click', () => validateAndProceed(3));
-            
-            prevButtons.step1.addEventListener('click', () => goToStep(0));
-            prevButtons.step2.addEventListener('click', () => goToStep(1));
-            prevButtons.step3.addEventListener('click', () => goToStep(2));
-            
-            placeOrderBtn.addEventListener('click', placeOrder);
-            agreeTermsCheckbox.addEventListener('change', () => {
-                placeOrderBtn.disabled = !agreeTermsCheckbox.checked;
+            // Isi kategori game
+            const gameContainer = document.getElementById('gameCategories');
+            formData.games.forEach(game => {
+                const gameCard = document.createElement('div');
+                gameCard.className = 'game-card';
+                gameCard.dataset.id = game.id;
+                gameCard.innerHTML = `
+                    <div style="font-size: 2rem;">${game.icon}</div>
+                    <div>${game.name}</div>
+                `;
+                gameCard.addEventListener('click', () => selectGame(game.id));
+                gameContainer.appendChild(gameCard);
             });
+
+            // Isi metode pembayaran
+            const paymentContainer = document.getElementById('paymentMethods');
+            formData.paymentMethods.forEach(method => {
+                const paymentCard = document.createElement('div');
+                paymentCard.className = 'payment-method';
+                paymentCard.dataset.id = method.id;
+                paymentCard.innerHTML = `
+                    <div style="font-size: 1.8rem;">${method.icon}</div>
+                    <div>${method.name}</div>
+                `;
+                paymentCard.addEventListener('click', () => selectPaymentMethod(method.id));
+                paymentContainer.appendChild(paymentCard);
+            });
+
+            // Setup event listeners untuk tombol navigasi
+            setupNavigation();
+        });
+
+        // Fungsi untuk setup navigasi form
+        function setupNavigation() {
+            // Tombol next dan previous
+            document.getElementById('next1').addEventListener('click', () => validateStep1());
+            document.getElementById('next2').addEventListener('click', () => validateStep2());
+            document.getElementById('next3').addEventListener('click', () => validateStep3());
+            document.getElementById('next4').addEventListener('click', () => validateStep4());
+            document.getElementById('next5').addEventListener('click', () => validateStep5());
+            document.getElementById('submitForm').addEventListener('click', () => validateStep6());
+
+            document.getElementById('prev2').addEventListener('click', () => goToStep(1));
+            document.getElementById('prev3').addEventListener('click', () => goToStep(2));
+            document.getElementById('prev4').addEventListener('click', () => goToStep(3));
+            document.getElementById('prev5').addEventListener('click', () => goToStep(4));
+            document.getElementById('prev6').addEventListener('click', () => goToStep(5));
         }
 
-        // Render game options
-        function renderGameOptions() {
-            gameOptionsContainer.innerHTML = '';
+        // Fungsi untuk pindah ke step tertentu
+        function goToStep(step) {
+            // Sembunyikan step saat ini
+            document.getElementById(`step${currentStep}Form`).classList.remove('active');
+            document.getElementById(`step${currentStep}`).classList.remove('active');
             
-            gameData.forEach(game => {
-                const gameOption = document.createElement('div');
-                gameOption.className = 'game-option';
-                
-                const input = document.createElement('input');
-                input.type = 'radio';
-                input.name = 'game';
-                input.id = game.id;
-                input.value = game.id;
-                input.addEventListener('change', () => {
-                    if (input.checked) {
-                        selectedGame = game;
-                        renderPackageOptions();
-                        nextButtons.step2.disabled = false;
-                    }
-                });
-                
-                const card = document.createElement('label');
-                card.className = 'game-card';
-                card.htmlFor = game.id;
-                
-                const icon = document.createElement('i');
-                icon.className = `game-icon fas ${game.icon}`;
-                
-                const name = document.createElement('div');
-                name.className = 'game-name';
-                name.textContent = game.name;
-                
-                card.appendChild(icon);
-                card.appendChild(name);
-                gameOption.appendChild(input);
-                gameOption.appendChild(card);
-                
-                gameOptionsContainer.appendChild(gameOption);
-            });
+            // Tampilkan step yang dituju
+            currentStep = step;
+            document.getElementById(`step${currentStep}Form`).classList.add('active');
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            
+            // Update progress bar
+            updateProgress();
         }
 
-        // Render package options based on selected game
-        function renderPackageOptions() {
-            if (!selectedGame) return;
-            
-            packageOptionsContainer.innerHTML = '';
-            selectedPackages = [];
-            orderTotal = 0;
-            updateTotalPrice();
-            
-            const packageList = document.createElement('div');
-            packageList.className = 'package-options';
-            
-            selectedGame.packages.forEach(pkg => {
-                const packageOption = document.createElement('div');
-                packageOption.className = 'package-option';
-                
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.id = pkg.id;
-                checkbox.className = 'package-checkbox';
-                checkbox.value = pkg.id;
-                checkbox.addEventListener('change', () => {
-                    if (checkbox.checked) {
-                        selectedPackages.push(pkg);
-                    } else {
-                        selectedPackages = selectedPackages.filter(item => item.id !== pkg.id);
-                    }
-                    updateTotalPrice();
-                    nextButtons.step3.disabled = selectedPackages.length === 0;
-                });
-                
-                const details = document.createElement('div');
-                details.className = 'package-details';
-                
-                const name = document.createElement('div');
-                name.className = 'package-name';
-                name.textContent = pkg.name;
-                
-                const price = document.createElement('div');
-                price.className = 'package-price';
-                price.textContent = `Rp ${pkg.price.toLocaleString('id-ID')}`;
-                
-                details.appendChild(name);
-                details.appendChild(price);
-                packageOption.appendChild(checkbox);
-                packageOption.appendChild(details);
-                packageList.appendChild(packageOption);
-            });
-            
-            packageOptionsContainer.appendChild(packageList);
-        }
-
-        // Update total price display
-        function updateTotalPrice() {
-            orderTotal = selectedPackages.reduce((total, pkg) => total + pkg.price, 0);
-            totalPriceElement.textContent = `Rp ${orderTotal.toLocaleString('id-ID')}`;
-            
-            // Also update summary if we're on step 4
-            if (currentStep === 3) {
-                updateOrderSummary();
+        // Fungsi untuk pindah ke step berikutnya
+        function goToNextStep() {
+            if (currentStep < totalSteps) {
+                goToStep(currentStep + 1);
             }
         }
 
-        // Update order summary in confirmation step
-        function updateOrderSummary() {
-            const fullName = document.getElementById('fullName').value;
-            const communityName = document.getElementById('communityName').value;
-            const whatsappNumber = document.getElementById('whatsappNumber').value;
+        // Fungsi untuk update progress bar
+        function updateProgress() {
+            const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('stepLineProgress').style.width = `${progressPercentage}%`;
             
-            summaryName.textContent = fullName;
-            summaryCommunity.textContent = communityName;
-            summaryWhatsapp.textContent = whatsappNumber;
-            summaryGame.textContent = selectedGame.name;
-            
-            const packageNames = selectedPackages.map(pkg => pkg.name).join(', ');
-            summaryPackages.textContent = packageNames;
-            
-            summaryTotalPrice.textContent = `Rp ${orderTotal.toLocaleString('id-ID')}`;
-        }
-
-        // Go to specific step
-        function goToStep(stepIndex) {
-            // Hide all steps
-            checkoutContainers.forEach(container => {
-                container.style.display = 'none';
-            });
-            
-            // Show current step
-            checkoutContainers[stepIndex].style.display = 'block';
-            currentStep = stepIndex;
-            
-            // Update progress steps
-            updateProgressSteps(stepIndex);
-            
-            // If going to confirmation step, update the summary
-            if (stepIndex === 3) {
-                updateOrderSummary();
-            }
-        }
-
-        // Validate current step and proceed to next
-        function validateAndProceed(step) {
-            let isValid = true;
-            
-            // Step-specific validation
-            if (step === 1) {
-                const fullName = document.getElementById('fullName').value.trim();
-                const communityName = document.getElementById('communityName').value.trim();
-                const whatsappNumber = document.getElementById('whatsappNumber').value.trim();
-                
-                if (!fullName || !communityName || !whatsappNumber) {
-                    isValid = false;
-                    alert('Harap isi semua data diri dengan lengkap');
-                }
-            } else if (step === 2) {
-                if (!selectedGame) {
-                    isValid = false;
-                    alert('Harap pilih game terlebih dahulu');
-                }
-            } else if (step === 3) {
-                if (selectedPackages.length === 0) {
-                    isValid = false;
-                    alert('Harap pilih minimal satu paket');
-                }
-            }
-            
-            if (isValid) {
-                goToStep(step);
-            }
-        }
-
-        // Update progress steps UI
-        function updateProgressSteps(currentStepIndex) {
-            const progressPercentage = (currentStepIndex / (progressSteps.length - 1)) * 100;
-            progressBar.style.width = `${progressPercentage}%`;
-            
-            progressSteps.forEach((step, index) => {
-                if (index < currentStepIndex) {
-                    step.classList.add('completed');
-                    step.classList.remove('active');
-                } else if (index === currentStepIndex) {
-                    step.classList.add('active');
-                    step.classList.remove('completed');
+            // Update step indicator
+            for (let i = 1; i <= totalSteps; i++) {
+                const stepElement = document.getElementById(`step${i}`);
+                if (i < currentStep) {
+                    stepElement.classList.remove('active');
+                    stepElement.classList.add('completed');
+                } else if (i === currentStep) {
+                    stepElement.classList.add('active');
+                    stepElement.classList.remove('completed');
                 } else {
-                    step.classList.remove('active', 'completed');
+                    stepElement.classList.remove('active', 'completed');
                 }
+            }
+        }
+
+        // Fungsi validasi step 1
+        function validateStep1() {
+            let isValid = true;
+            const fullName = document.getElementById('fullName');
+            const communityName = document.getElementById('communityName');
+            const whatsappNumber = document.getElementById('whatsappNumber');
+
+            // Validasi nama lengkap
+            if (!fullName.value.trim()) {
+                fullName.classList.add('input-error');
+                isValid = false;
+            } else {
+                fullName.classList.remove('input-error');
+            }
+
+            // Validasi nama komunitas
+            if (!communityName.value.trim()) {
+                communityName.classList.add('input-error');
+                isValid = false;
+            } else {
+                communityName.classList.remove('input-error');
+            }
+
+            // Validasi nomor WhatsApp
+            const whatsappRegex = /^[0-9]{10,15}$/;
+            if (!whatsappNumber.value.trim() || !whatsappRegex.test(whatsappNumber.value)) {
+                whatsappNumber.classList.add('input-error');
+                isValid = false;
+            } else {
+                whatsappNumber.classList.remove('input-error');
+            }
+
+            if (isValid) {
+                goToNextStep();
+            }
+        }
+
+        // Fungsi validasi step 2
+        function validateStep2() {
+            let isValid = true;
+            const eventDuration = document.getElementById('eventDuration');
+            const eventDate = document.getElementById('eventDate');
+
+            // Validasi durasi event
+            if (!eventDuration.value) {
+                eventDuration.classList.add('input-error');
+                isValid = false;
+            } else {
+                eventDuration.classList.remove('input-error');
+                // Simpan durasi event untuk perhitungan total
+                window.eventDuration = parseInt(eventDuration.value);
+            }
+
+            // Validasi tanggal pelaksanaan
+            if (!eventDate.value) {
+                eventDate.classList.add('input-error');
+                isValid = false;
+            } else {
+                eventDate.classList.remove('input-error');
+            }
+
+            if (isValid) {
+                goToNextStep();
+            }
+        }
+
+        // Fungsi untuk memilih game
+        function selectGame(gameId) {
+            selectedGame = gameId;
+            
+            // Update UI untuk game yang dipilih
+            document.querySelectorAll('.game-card').forEach(card => {
+                if (card.dataset.id === gameId) {
+                    card.classList.add('selected');
+                } else {
+                    card.classList.remove('selected');
+                }
+            });
+            
+            // Isi layanan yang tersedia berdasarkan game yang dipilih
+            populateServices(gameId);
+            
+            // Sembunyikan pesan error jika ada
+            document.getElementById('gameError').style.display = 'none';
+        }
+
+        // Fungsi untuk mengisi layanan berdasarkan game yang dipilih
+        function populateServices(gameId) {
+            const services = formData.services[gameId] || [];
+            const serviceContainer = document.getElementById('serviceOptions');
+            serviceContainer.innerHTML = '';
+            
+            services.forEach(service => {
+                const serviceItem = document.createElement('div');
+                serviceItem.className = 'service-item';
+                serviceItem.innerHTML = `
+                    <input type="${service.type}" id="service-${service.id}" data-price="${service.price}">
+                    <label for="service-${service.id}">
+                        <strong>${service.name}</strong> - ${service.description}
+                        <span class="service-price">(Rp ${service.price.toLocaleString('id-ID')}/hari)</span>
+                    </label>
+                `;
+                
+                // Tambahkan event listener untuk update total saat layanan dipilih
+                const checkbox = serviceItem.querySelector('input');
+                checkbox.addEventListener('change', updateTotal);
+                
+                serviceContainer.appendChild(serviceItem);
             });
         }
 
-        // Place order via WhatsApp
-        function placeOrder() {
-            if (!agreeTermsCheckbox.checked) {
-                alert('Anda harus menyetujui syarat dan ketentuan terlebih dahulu');
+        // Fungsi untuk memilih metode pembayaran
+        function selectPaymentMethod(methodId) {
+            selectedPaymentMethod = methodId;
+            
+            // Update UI untuk metode pembayaran yang dipilih
+            document.querySelectorAll('.payment-method').forEach(method => {
+                if (method.dataset.id === methodId) {
+                    method.classList.add('selected');
+                } else {
+                    method.classList.remove('selected');
+                }
+            });
+            
+            // Sembunyikan pesan error jika ada
+            document.getElementById('paymentError').style.display = 'none';
+        }
+function updateTotal() {
+    const checkboxes = document.querySelectorAll('#serviceOptions input[type="checkbox"]:checked, .service-options input[type="checkbox"]:checked');
+    const duration = window.eventDuration || 1;
+    
+    let total = 0;
+    selectedServices = [];
+    
+    checkboxes.forEach(checkbox => {
+        const price = parseInt(checkbox.dataset.price);
+        const serviceId = checkbox.id;
+        const serviceName = checkbox.nextElementSibling.querySelector('strong').textContent;
+        
+        // Untuk jasa lainnya, tidak dikalikan durasi
+        const isAdditionalService = !checkbox.closest('#serviceOptions');
+        const days = isAdditionalService ? 1 : duration;
+        
+        total += price * days;
+        selectedServices.push({
+            id: serviceId,
+            name: serviceName,
+            price: price,
+            days: days,
+            subtotal: price * days
+        });
+    });
+    
+    // Tampilkan total jika ada layanan yang dipilih
+    const totalDisplay = document.getElementById('totalDisplay');
+    if (total > 0) {
+        totalDisplay.classList.remove('hidden');
+        document.getElementById('totalAmount').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+    } else {
+        totalDisplay.classList.add('hidden');
+    }
+}
+
+        // Fungsi validasi step 3
+        function validateStep3() {
+            if (!selectedGame) {
+                document.getElementById('gameError').style.display = 'block';
                 return;
             }
             
-            const fullName = document.getElementById('fullName').value;
-            const communityName = document.getElementById('communityName').value;
-            const whatsappNumber = document.getElementById('whatsappNumber').value;
-            const packageNames = selectedPackages.map(pkg => pkg.name).join(', ');
-            
-            // Format WhatsApp message
-            const message = `Halo Sabada Organizer, saya ingin melakukan order:
-            
-Nama: ${fullName}
-Komunitas: ${communityName}
-Nomor HP: ${whatsappNumber}
-Game: ${selectedGame.name}
-Paket: ${packageNames}
-Total Harga: Rp ${orderTotal.toLocaleString('id-ID')}
-
-Mohon diproses, terima kasih!`;
-            
-            // Encode message for URL
-            const encodedMessage = encodeURIComponent(message);
-            
-            // Create WhatsApp link
-            const whatsappLink = `https://wa.me/6282125301595?text=${encodedMessage}`;
-            
-            // Open in new tab
-            window.open(whatsappLink, '_blank');
+            goToNextStep();
         }
 
-        // Initialize the application when DOM is loaded
-        document.addEventListener('DOMContentLoaded', init);
+        // Fungsi validasi step 4
+        function validateStep4() {
+            // Tidak ada validasi khusus di step ini
+            // Pengguna bisa lanjut tanpa memilih layanan (opsional)
+            goToNextStep();
+        }
+
+        // Fungsi validasi step 5
+        function validateStep5() {
+            if (!selectedPaymentMethod) {
+                document.getElementById('paymentError').style.display = 'block';
+                return;
+            }
+            
+            goToNextStep();
+        }
+
+function submitForm() {
+    // 1. Hitung total pembayaran
+    let totalAmount = 0;
+    const serviceItems = document.querySelectorAll('#serviceOptions input[type="checkbox"]:checked, .service-options input[type="checkbox"]:checked');
+    
+    serviceItems.forEach(item => {
+        const price = parseInt(item.dataset.price) || 0;
+        const duration = parseInt(document.getElementById('eventDuration').value) || 1;
+        totalAmount += price * duration;
+    });
+
+    // 2. Tentukan nomor admin berdasarkan shift
+    const now = new Date();
+    const hours = now.getHours();
+    let adminNumber = '6288991734780'; // Nomor default (shift 2)
+    
+    if (hours >= 5 && hours < 13) { // Shift 1: 05.00 - 13.00 WIB
+        adminNumber = '6288991734780'; // Ganti dengan nomor shift 1
+    }
+
+    // 3. Format pesan WhatsApp
+    let message = `Halo Admin, saya ingin mengajukan Jasa EO:\n\n`;
+    message += `Nama: ${document.getElementById('fullName').value || 'Tidak diisi'}\n`;
+    message += `Komunitas: ${document.getElementById('communityName').value || 'Tidak diisi'}\n`;
+    message += `Nomor WA: ${document.getElementById('whatsappNumber').value || 'Tidak diisi'}\n`;
+    message += `Durasi Event: ${document.getElementById('eventDuration').value || '0'} Hari\n`;
+    message += `Tanggal Pelaksanaan: ${document.getElementById('eventDate').value || 'Tidak diisi'}\n`;
+    message += `Kategori Game: ${selectedGame || 'Tidak dipilih'}\n`;
+    message += `Total Pembelian: Rp ${totalAmount.toLocaleString('id-ID')}\n`;
+    message += `Metode Pembayaran: ${selectedPaymentMethod || 'Tidak dipilih'}\n\n`;
+    message += `Saya telah menyetujui syarat & ketentuan.`;
+
+    // 4. Buka WhatsApp
+    window.open(`https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`, '_blank');
+    return true;
+}
+
+
+function validateStep6() {
+    const agreeTerms = document.getElementById('agreeTerms');
+    const termsError = document.getElementById('termsError');
+    
+    if (!agreeTerms.checked) {
+        termsError.style.display = 'block';
+        return false;
+    }
+    
+    return submitForm();
+}
+// Event listener yang aman
+document.getElementById('submitForm').addEventListener('click', function(e) {
+    e.preventDefault();
+    validateStep6();
+});
     </script>
-
-    <a href="https://whatsapp.com/channel/0029Vb6ZMp3Chq6WUhpfAn2v" 
-       target="_blank" 
-       style="
-           position: fixed;
-           bottom: 20px;
-           left: 10px;
-           background-color: #c20b0b;
-           color: black;
-           padding: 12px 18px;
-           text-decoration: none;
-           border-radius: 50px;
-           box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-           border: 1px solid #ccc;
-           font-weight: bold;
-           z-index: 999;
-       ">
-       Gabung Saluran whatsapp
-    </a>
-
 </body>
 </html>
