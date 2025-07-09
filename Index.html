@@ -254,16 +254,19 @@
         }
 
         .total-display {
-            background-color: rgba(40, 167, 69, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--success-color);
-            animation: pulse 2s infinite;
-        }
+    background-color: rgba(40, 167, 69, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--success-color);
+}
+
+.total-display.hidden {
+    display: none;
+}
 
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -376,7 +379,7 @@
 <body>
     <div class="container">
         <h1>SABADA ORGANIZER</h1>
-        <p class="description">Silakan isi data diri Anda untuk melanjutkan pengajuan jasa.</p>
+        <p class="description">Silakan isi data diri Anda untuk melanjutkan pengajuan jasa eo ke kami.</p>
 
         <div class="step-indicator">
             <div class="step-line"></div>
@@ -455,104 +458,17 @@
                 <div class="service-options" id="serviceOptions">
                     <!-- Service options will be filled by JavaScript -->
                 </div>
-                <!-- Ganti bagian ini di step 4 (Pilih Jasa EO) -->
-<div class="form-group">
+            </div>
+            <div class="form-group">
     <label>Jasa EO Lainnya</label>
-    <div class="service-options">
-<div class="service-item">
-    <input type="checkbox" id="bs1" data-price="1000">
-    <label for="bs1">
-        <strong>Formulir Pendaftaran Online</strong> - Formulir digital pendaftaran peserta
-        <span class="service-price">(Rp 1.000)</span>
-    </label>
-</div>
-<div class="service-item">
-    <input type="checkbox" id="bs2" data-price="2000">
-    <label for="bs2">
-        <strong>Data sheet Peserta Terorganisir</strong> - Data peserta dalam format rapi
-        <span class="service-price">(Rp 2.000)</span>
-    </label>
-</div>
-<div class="service-item">
-    <input type="checkbox" id="bs3" data-price="5000">
-    <label for="bs3">
-        <strong>Rekap Point Peserta Tournament</strong> - Rekap nilai peserta turnamen
-        <span class="service-price">(Rp 5.000)</span>
-    </label>
-</div>
-<div class="service-item">
-    <input type="checkbox" id="bs4" data-price="7000">
-    <label for="bs4">
-        <strong>Sistem Eliminasi Bracket web</strong> - Bracket eliminasi otomatis via web
-        <span class="service-price">(Rp 7.000)</span>
-    </label>
-</div>
-<div class="service-item">
-    <input type="checkbox" id="bs5" data-price="17000">
-    <label for="bs5">
-        <strong>Web Leaderboard Dynamic</strong> - Leaderboard live dan interaktif
-        <span class="service-price">(Rp 17.000)</span>
-    </label>
-</div>
-<div class="service-item">
-    <input type="checkbox" id="bs6" data-price="10000">
-    <label for="bs6">
-        <strong>Template Poster polos</strong> - Template poster dasar siap edit
-        <span class="service-price">(Rp 10.000)</span>
-    </label>
-</div>
-<div class="service-item">
-    <input type="checkbox" id="bs7" data-price="20000">
-    <label for="bs7">
-        <strong>Poster Pro+ Branding Event</strong> - Poster premium branding event
-        <span class="service-price">(Rp 20.000)</span>
-    </label>
-</div>
-<div class="service-item">
-    <input type="checkbox" id="bs8" data-price="15000">
-    <label for="bs8">
-        <strong>Overlay Lite</strong> - Overlay sederhana untuk live atau konten
-        <span class="service-price">(Rp 15.000)</span>
-    </label>
-</div>
-<div class="service-item">
-    <input type="checkbox" id="bs9" data-price="25000">
-    <label for="bs9">
-        <strong>Overlay Pro+</strong> - Overlay profesional siap pakai
-        <span class="service-price">(Rp 25.000)</span>
-    </label>
-</div>
-<div class="service-item">
-    <input type="checkbox" id="bs12" data-price="10000">
-    <label for="bs12">
-        <strong>E-Certificate polos</strong> - Sertifikat digital sederhana
-        <span class="service-price">(Rp 10.000)</span>
-    </label>
-</div>
-<div class="service-item">
-    <input type="checkbox" id="bs13" data-price="15000">
-    <label for="bs13">
-        <strong>E-Certificate pro+</strong> - Sertifikat digital premium
-        <span class="service-price">(Rp 15.000)</span>
-    </label>
-</div>
-<div class="service-item">
-    <input type="checkbox" id="bs14" data-price="5000">
-    <label for="bs14">
-        <strong>Tim teknis event/support</strong> - Bantuan teknis saat event berlangsung
-        <span class="service-price">(Rp 5.000)</span>
-    </label>
-</div>
-<div class="service-item">
-    <input type="checkbox" id="bs15" data-price="20000">
-    <label for="bs15">
-        <strong>Overlay Nama Team & Player</strong> - Overlay khusus nama tim & player
-        <span class="service-price">(Rp 20.000)</span>
-    </label>
-</div>
+    <div id="additionalServicesContainer" class="service-options">
+        <!-- Jasa tambahan akan diisi oleh JavaScript -->
     </div>
 </div>
-            </div>
+            <!-- Taruh di dalam step 4Form atau step5Form -->
+<div id="totalDisplay" class="total-display hidden">
+    Total Pembayaran: <span id="totalAmount">Rp 0</span>
+</div>
             <div class="btn-group">
                 <button class="btn btn-secondary" id="prev4">Sebelumnya</button>
                 <button class="btn btn-primary" id="next4">Lanjutkan ke Pembayaran</button>
@@ -580,16 +496,17 @@
                 <label class="required">Syarat & Ketentuan</label>
                 <div class="terms-container" id="termsContainer">
                     <h3>Syarat dan Ketentuan Pengajuan Jasa EO</h3>
-                    <p>1. Dengan mengisi formulir ini, Anda menyetujui semua syarat dan ketentuan yang berlaku.</p>
-                    <p>2. Pembayaran harus dilakukan dalam waktu 24 jam setelah pengajuan untuk memastikan slot tersedia.</p>
-                    <p>3. Pembatalan setelah pembayaran akan dikenakan biaya administrasi sebesar 30% dari total biaya.</p>
-                    <p>4. Perubahan jadwal pelaksanaan event harus diberitahukan minimal 7 hari sebelum tanggal pelaksanaan.</p>
-                    <p>5. EO berhak menolak permintaan yang melanggar peraturan platform game yang bersangkutan.</p>
-                    <p>6. Semua konten yang disiarkan harus sesuai dengan pedoman komunitas dan tidak mengandung materi yang melanggar hak cipta.</p>
-                    <p>7. Biaya tambahan mungkin berlaku untuk permintaan khusus di luar paket standar.</p>
-                    <p>8. Semua pembayaran bersifat final dan tidak dapat dikembalikan kecuali ada pembatalan dari pihak EO.</p>
-                    <p>9. Waktu respon admin adalah pada jam operasional (05.00 - 21.00 WIB).</p>
-                    <p>10. Dengan mencentang kotak persetujuan, Anda mengakui bahwa telah membaca dan memahami semua syarat dan ketentuan ini.</p>
+                    <p>1. Untuk Pembayaran Dapat Melalui All E-wallet dan Qris.</p>
+                    <p>2. Proses Pengerjaan Selama 7 hari kerja Sesuai Antrian (jika ada).</p>
+                    <p>3. Harga Tidak Dapat di Nego.</p>
+                    <p>4. Revisi Hanya Di Boleh kan Sebanyak 5x.</p>
+                    <p>5. Khusus Desain File Akan Dikirim Dalam Bentuk (dokumen, Png, Zip).</p>
+                    <p>6. Untuk Livestreaming Bisa Request Akun di beberapa platform Customer (Jika Tidak Request akan di alihkan ke channel khusus Adinoki).</p>
+                    <p>7. Ada Sistem Garansi (Jika Ada kesalahan Teknis, Human Error, atau dari Pihak Admin Uang Akan Dikembalikan 100%.</p>
+                    <p>8. Admin Memiliki Hak Untuk memposting Hasil Orderan Dengan Watermark Apabila Diperlukan Untuk Kebutuhan Sample Dan Portofolio .</p>
+                    <p>9. Lama Pengerjaan design Serta overlay 1-7 hari tergantung tingkat kesulitan, kondisi, Dan antrian.</p>
+                    <p>10. Antrian Bisa dipercepat tapi harus ada biaya tambahan.</p>
+                    <p>11. setiap setelah order di sepakati dari pihak pembeli, pembeli wajib memberikan bukti pembayaran terlebih dahulu sebagai gantinya admin akan memberikan garansi 100% uang kembali jika terjadi kesalahan (khusus event order DLL).</p>
                 </div>
                 <div class="form-group">
                     <div class="service-item">
@@ -611,42 +528,181 @@
         // Data JSON untuk game, layanan, dan metode pembayaran
         const formData = {
             games: [
-                { id: 'bloodstrike', name: 'Bloodstrike', icon: '🎯' },
-                { id: 'roblox', name: 'Roblox', icon: '🧱' },
-                { id: 'gta', name: 'GTA', icon: '🚗' },
-                { id: 'mobile-legends', name: 'Mobile Legends', icon: '⚔️' }
+                { 
+                    id: 'bloodstrike', 
+                    name: 'Bloodstrike', 
+                    icon: 'https://imageshack.com/i/pnXLW6Psj' 
+                },
+                { 
+                    id: 'roblox', 
+                    name: 'Roblox', 
+                    icon: 'https://imageshack.com/i/pmJYkm3Sj' 
+                },
+                { 
+                    id: 'gta', 
+                    name: 'GTA', 
+                    icon: 'https://imageshack.com/i/pm7WkBEpp' 
+                },
             ],
-            services: {
-                'bloodstrike': [
-                    { id: 'landscape', name: 'Live landscape', price: 5000, description: 'Terhitung harga × jumlah hari', type: 'checkbox' },
-                    { id: 'portrait', name: 'Live Portrait', price: 3000, description: 'Terhitung harga × jumlah hari', type: 'checkbox' }
-                ],
-                'roblox': [
-                    { id: 'live-stream', name: 'Live Stream', price: 450000, description: 'Prioritas, tidak wajib', type: 'checkbox' },
-                    { id: 'landscape', name: 'Landscape', price: 250000, description: 'Terhitung harga × jumlah hari', type: 'checkbox' },
-                    { id: 'custom-server', name: 'Custom Server', price: 400000, description: 'Setup server khusus', type: 'checkbox' }
-                ],
-                'gta': [
-                    { id: 'live-stream', name: 'Live Stream', price: 600000, description: 'Prioritas, tidak wajib', type: 'checkbox' },
-                    { id: 'multi-angle', name: 'Multi Angle', price: 400000, description: 'Beberapa sudut kamera', type: 'checkbox' },
-                    { id: 'mod-support', name: 'Mod Support', price: 350000, description: 'Dukungan mod khusus', type: 'checkbox' }
-                ],
-                'mobile-legends': [
-                    { id: 'live-stream', name: 'Live Stream', price: 550000, description: 'Prioritas, tidak wajib', type: 'checkbox' },
-                    { id: 'commentary', name: 'Komentator', price: 300000, description: 'Komentator profesional', type: 'checkbox' },
-                    { id: 'replay', name: 'Replay Highlight', price: 200000, description: 'Pembuatan replay', type: 'checkbox' }
-                ]
+  
+    services: {
+        'bloodstrike': [
+            { 
+                id: 'landscape', 
+                name: 'Live landscape', 
+                price: 5000, 
+                description: 'Terhitung harga × jumlah hari', 
+                type: 'checkbox', 
+                isDaily: true 
             },
-            paymentMethods: [
-                { id: 'dana', name: 'Dana', icon: '💳' },
-                { id: 'ovo', name: 'OVO', icon: '📱' },
-                { id: 'gopay', name: 'GoPay', icon: '🛵' },
-                { id: 'qris', name: 'QRIS', icon: '🔳' }
-            ],
-            adminNumbers: {
-                shift1: '6288991734780',  // Ganti dengan nomor shift 1
-                shift2: '6288991734780'   // Ganti dengan nomor kamu
+            { 
+                id: 'portrait', 
+                name: 'Live Portrait', 
+                price: 3000, 
+                description: 'Terhitung harga × jumlah hari', 
+                type: 'checkbox', 
+                isDaily: true 
             }
+        ],
+        'roblox': [
+            { 
+                id: 'live-stream', 
+                name: 'Live Stream', 
+                price: 450000, 
+                description: 'Prioritas, tidak wajib', 
+                type: 'checkbox', 
+                isDaily: true 
+            }
+        ],
+        // ... tambahkan untuk game lainnya ...
+    },
+    
+    additionalServices: {
+        'bloodstrike': [
+    {
+        id: 'bs1',
+        name: 'Formulir Pendaftaran Online',
+        price: 1000,
+        description: 'Formulir digital untuk pendaftaran peserta',
+        type: 'checkbox'
+    },
+    {
+        id: 'bs2',
+        name: 'Data sheet Peserta Terorganisir',
+        price: 2000,
+        description: 'Data peserta dalam format rapi dan siap pakai',
+        type: 'checkbox'
+    },
+    {
+        id: 'bs3',
+        name: 'Rekap Point Peserta Tournament',
+        price: 5000,
+        description: 'File rekap nilai/point peserta selama turnamen',
+        type: 'checkbox'
+    },
+    {
+        id: 'bs4',
+        name: 'Sistem Eliminasi Bracket web',
+        price: 7000,
+        description: 'Bracket eliminasi otomatis berbasis web',
+        type: 'checkbox'
+    },
+    {
+        id: 'bs5',
+        name: 'Web Leaderboard Dynamic',
+        price: 17000,
+        description: 'Leaderboard online dan real-time',
+        type: 'checkbox'
+    },
+    {
+        id: 'bs6',
+        name: 'Template Poster polos',
+        price: 10000,
+        description: 'Desain poster kosong siap edit',
+        type: 'checkbox'
+    },
+    {
+        id: 'bs7',
+        name: 'Poster Pro+ Branding Event',
+        price: 20000,
+        description: 'Desain poster premium dengan branding lengkap',
+        type: 'checkbox'
+    },
+    {
+        id: 'bs8',
+        name: 'Overlay Lite',
+        price: 15000,
+        description: 'Overlay standar untuk keperluan streaming',
+        type: 'checkbox'
+    },
+    {
+        id: 'bs9',
+        name: 'Overlay Pro+',
+        price: 25000,
+        description: 'Overlay premium dengan elemen grafis lengkap',
+        type: 'checkbox'
+    },
+    {
+        id: 'bs10',
+        name: 'E-Certificate polos',
+        price: 10000,
+        description: 'Sertifikat digital tanpa desain tambahan',
+        type: 'checkbox'
+    },
+    {
+        id: 'bs11',
+        name: 'E-Certificate pro+',
+        price: 15000,
+        description: 'Sertifikat digital dengan desain profesional',
+        type: 'checkbox'
+    },
+    {
+        id: 'bs12',
+        name: 'Tim teknis event/support',
+        price: 5000,
+        description: 'Dukungan teknis selama acara berlangsung',
+        type: 'checkbox'
+    },
+    {
+        id: 'bs13',
+        name: 'Overlay Nama Team & Player',
+        price: 20000,
+        description: 'Overlay dengan nama tim dan pemain otomatis',
+        type: 'checkbox'
+    }
+],
+        'roblox': [
+            {
+                id: 'roblox1',
+                name: 'Server Roblox VIP',
+                price: 30000,
+                description: 'Server khusus untuk event',
+                type: 'checkbox'
+            }
+        ],
+    },
+            paymentMethods: [
+                { 
+                  id: 'dana', 
+                name: 'Dana', 
+                icon: 'https://imageshack.com/i/pnhYg0lZp' 
+                },
+                {
+                  id: 'ovo', 
+                  name: 'OVO', 
+                  icon: 'https://imageshack.com/i/pmA1J5ZRp' 
+                },
+                { 
+                  id: 'gopay', 
+                  name: 'GoPay', 
+                  icon: 'https://imageshack.com/i/pnEGxKwap' 
+                },
+                { 
+                  id: 'qris', 
+                  name: 'QRIS', 
+                  icon: 'https://imageshack.com/i/poyHB7nGp' 
+                }
+            ]
         };
 
         // Variabel state form
@@ -675,14 +731,14 @@
             const yyyy = today.getFullYear();
             document.getElementById('eventDate').min = `${yyyy}-${mm}-${dd}`;
 
-            // Isi kategori game
+            // Isi kategori game dengan gambar
             const gameContainer = document.getElementById('gameCategories');
             formData.games.forEach(game => {
                 const gameCard = document.createElement('div');
                 gameCard.className = 'game-card';
                 gameCard.dataset.id = game.id;
                 gameCard.innerHTML = `
-                    <div style="font-size: 2rem;">${game.icon}</div>
+                    <img src="${game.icon}" alt="${game.name}">
                     <div>${game.name}</div>
                 `;
                 gameCard.addEventListener('click', () => selectGame(game.id));
@@ -696,7 +752,7 @@
                 paymentCard.className = 'payment-method';
                 paymentCard.dataset.id = method.id;
                 paymentCard.innerHTML = `
-                    <div style="font-size: 1.8rem;">${method.icon}</div>
+                    <img src="${method.icon}" alt="${method.name}">
                     <div>${method.name}</div>
                 `;
                 paymentCard.addEventListener('click', () => selectPaymentMethod(method.id));
@@ -832,7 +888,7 @@
             }
         }
 
-        // Fungsi untuk memilih game
+// Modifikasi fungsi selectGame untuk menampilkan jasa tambahan spesifik game
         function selectGame(gameId) {
             selectedGame = gameId;
             
@@ -845,35 +901,67 @@
                 }
             });
             
-            // Isi layanan yang tersedia berdasarkan game yang dipilih
+            // Isi layanan utama dan tambahan berdasarkan game yang dipilih
             populateServices(gameId);
+            populateAdditionalServices(gameId);
             
             // Sembunyikan pesan error jika ada
             document.getElementById('gameError').style.display = 'none';
         }
+        
+        // Fungsi untuk mengisi layanan utama
+function populateServices(gameId) {
+    const services = formData.services[gameId] || [];
+    const serviceContainer = document.getElementById('serviceOptions');
+    serviceContainer.innerHTML = '';
+    
+    services.forEach(service => {
+        const serviceItem = document.createElement('div');
+        serviceItem.className = 'service-item';
+        serviceItem.innerHTML = `
+            <input type="${service.type}" id="service-${service.id}" 
+                   data-price="${service.price}" data-daily="${service.isDaily ? 'true' : 'false'}">
+            <label for="service-${service.id}">
+                <strong>${service.name}</strong> - ${service.description}
+                <span class="service-price">(Rp ${service.price.toLocaleString('id-ID')}${service.isDaily ? '/hari' : ''})</span>
+            </label>
+        `;
+        
+        const checkbox = serviceItem.querySelector('input');
+        checkbox.addEventListener('change', updateTotal);
+        serviceContainer.appendChild(serviceItem);
+    });
+}
 
-        // Fungsi untuk mengisi layanan berdasarkan game yang dipilih
-        function populateServices(gameId) {
-            const services = formData.services[gameId] || [];
-            const serviceContainer = document.getElementById('serviceOptions');
-            serviceContainer.innerHTML = '';
+// Fungsi baru untuk mengisi jasa tambahan spesifik game
+        function populateAdditionalServices(gameId) {
+    const additionalServices = formData.additionalServices[gameId] || [];
+    // Perbaikan selector ini:
+    const additionalContainer = document.getElementById('additionalServicesContainer');
+    
+    // Buat container jika belum ada
+    if (!additionalContainer) {
+        const newContainer = document.createElement('div');
+        newContainer.id = 'additionalServicesContainer';
+        document.getElementById('step4Form').insertBefore(newContainer, document.querySelector('#step4Form .btn-group'));
+    }
+    
+    additionalContainer.innerHTML = '';
             
-            services.forEach(service => {
+            additionalServices.forEach(service => {
                 const serviceItem = document.createElement('div');
                 serviceItem.className = 'service-item';
                 serviceItem.innerHTML = `
-                    <input type="${service.type}" id="service-${service.id}" data-price="${service.price}">
+                    <input type="${service.type}" id="service-${service.id}" data-price="${service.price}" data-daily="false">
                     <label for="service-${service.id}">
                         <strong>${service.name}</strong> - ${service.description}
-                        <span class="service-price">(Rp ${service.price.toLocaleString('id-ID')}/hari)</span>
+                        <span class="service-price">(Rp ${service.price.toLocaleString('id-ID')})</span>
                     </label>
                 `;
                 
-                // Tambahkan event listener untuk update total saat layanan dipilih
                 const checkbox = serviceItem.querySelector('input');
                 checkbox.addEventListener('change', updateTotal);
-                
-                serviceContainer.appendChild(serviceItem);
+                additionalContainer.appendChild(serviceItem);
             });
         }
 
@@ -893,37 +981,29 @@
             // Sembunyikan pesan error jika ada
             document.getElementById('paymentError').style.display = 'none';
         }
+        
 function updateTotal() {
-    const checkboxes = document.querySelectorAll('#serviceOptions input[type="checkbox"]:checked, .service-options input[type="checkbox"]:checked');
-    const duration = window.eventDuration || 1;
+    const checkboxes = document.querySelectorAll(`
+        #serviceOptions input[type="checkbox"]:checked,
+        #additionalServicesContainer input[type="checkbox"]:checked
+    `);
     
+    const duration = window.eventDuration || 1;
     let total = 0;
-    selectedServices = [];
     
     checkboxes.forEach(checkbox => {
         const price = parseInt(checkbox.dataset.price);
-        const serviceId = checkbox.id;
-        const serviceName = checkbox.nextElementSibling.querySelector('strong').textContent;
-        
-        // Untuk jasa lainnya, tidak dikalikan durasi
-        const isAdditionalService = !checkbox.closest('#serviceOptions');
-        const days = isAdditionalService ? 1 : duration;
-        
-        total += price * days;
-        selectedServices.push({
-            id: serviceId,
-            name: serviceName,
-            price: price,
-            days: days,
-            subtotal: price * days
-        });
+        const isDaily = checkbox.dataset.daily === 'true';
+        total += isDaily ? price * duration : price;
     });
     
-    // Tampilkan total jika ada layanan yang dipilih
+    // Update tampilan total
     const totalDisplay = document.getElementById('totalDisplay');
+    const totalAmount = document.getElementById('totalAmount');
+    
     if (total > 0) {
         totalDisplay.classList.remove('hidden');
-        document.getElementById('totalAmount').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+        totalAmount.textContent = `Rp ${total.toLocaleString('id-ID')}`;
     } else {
         totalDisplay.classList.add('hidden');
     }
@@ -941,10 +1021,19 @@ function updateTotal() {
 
         // Fungsi validasi step 4
         function validateStep4() {
-            // Tidak ada validasi khusus di step ini
-            // Pengguna bisa lanjut tanpa memilih layanan (opsional)
-            goToNextStep();
-        }
+    const hasSelectedServices = document.querySelectorAll(`
+        #serviceOptions input[type="checkbox"]:checked,
+        #additionalServicesContainer input[type="checkbox"]:checked
+    `).length > 0;
+    
+    if (!hasSelectedServices) {
+        alert('Silakan pilih minimal satu layanan');
+        return false;
+    }
+    
+    goToNextStep();
+    return true;
+}
 
         // Fungsi validasi step 5
         function validateStep5() {
@@ -957,39 +1046,70 @@ function updateTotal() {
         }
 
 function submitForm() {
-    // 1. Hitung total pembayaran
-    let totalAmount = 0;
-    const serviceItems = document.querySelectorAll('#serviceOptions input[type="checkbox"]:checked, .service-options input[type="checkbox"]:checked');
-    
-    serviceItems.forEach(item => {
-        const price = parseInt(item.dataset.price) || 0;
-        const duration = parseInt(document.getElementById('eventDuration').value) || 1;
-        totalAmount += price * duration;
-    });
+    // 1. Data Nomor Admin (Shift)
+    const adminNumbers = {
+        shift1: '6282125301595',  // Shift pagi (contoh: 08.00-16.00)
+        shift2: '6288991734780'   // Shift siang/malam (contoh: 16.00-24.00)
+    };
 
-    // 2. Tentukan nomor admin berdasarkan shift
+    // 2. Tentukan nomor admin berdasarkan jam sekarang
     const now = new Date();
     const hours = now.getHours();
-    let adminNumber = '6288991734780'; // Nomor default (shift 2)
+    let adminNumber = adminNumbers.shift2; // Default shift 2
     
-    if (hours >= 5 && hours < 13) { // Shift 1: 05.00 - 13.00 WIB
-        adminNumber = '6288991734780'; // Ganti dengan nomor shift 1
+    // Contoh pembagian shift:
+    // - Shift 1: 08.00-16.00 (nomor admin 1)
+    // - Shift 2: 16.00-24.00 (nomor admin 2)
+    if (hours >= 5 && hours < 13) {
+        adminNumber = adminNumbers.shift1;
     }
 
-    // 3. Format pesan WhatsApp
-    let message = `Halo Admin, saya ingin mengajukan Jasa EO:\n\n`;
-    message += `Nama: ${document.getElementById('fullName').value || 'Tidak diisi'}\n`;
-    message += `Komunitas: ${document.getElementById('communityName').value || 'Tidak diisi'}\n`;
-    message += `Nomor WA: ${document.getElementById('whatsappNumber').value || 'Tidak diisi'}\n`;
-    message += `Durasi Event: ${document.getElementById('eventDuration').value || '0'} Hari\n`;
-    message += `Tanggal Pelaksanaan: ${document.getElementById('eventDate').value || 'Tidak diisi'}\n`;
-    message += `Kategori Game: ${selectedGame || 'Tidak dipilih'}\n`;
-    message += `Total Pembelian: Rp ${totalAmount.toLocaleString('id-ID')}\n`;
-    message += `Metode Pembayaran: ${selectedPaymentMethod || 'Tidak dipilih'}\n\n`;
-    message += `Saya telah menyetujui syarat & ketentuan.`;
+    // 3. Kumpulkan detail layanan yang dipilih
+    let serviceDetails = "";
+    let totalAmount = 0;
+    
+    document.querySelectorAll(
+        '#serviceOptions input[type="checkbox"]:checked, ' +
+        '#additionalServicesContainer input[type="checkbox"]:checked'
+    ).forEach(item => {
+        const price = parseInt(item.dataset.price) || 0;
+        const isDaily = item.dataset.daily === 'true';
+        const days = isDaily ? (parseInt(document.getElementById('eventDuration').value) || 1) : 1;
+        const serviceName = item.nextElementSibling.querySelector('strong').textContent;
+        const subtotal = price * days;
+        
+        totalAmount += subtotal;
+        
+        serviceDetails += `➤ ${serviceName}\n`;
+        serviceDetails += `   Harga: Rp ${price.toLocaleString('id-ID')}`;
+        if (isDaily) serviceDetails += `/hari × ${days} hari`;
+        serviceDetails += `\n   Subtotal: Rp ${subtotal.toLocaleString('id-ID')}\n\n`;
+    });
 
-    // 4. Buka WhatsApp
-    window.open(`https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`, '_blank');
+    // 4. Format pesan WhatsApp
+    const gameName = formData.games.find(g => g.id === selectedGame)?.name || 'Tidak dipilih';
+    const paymentName = formData.paymentMethods.find(p => p.id === selectedPaymentMethod)?.name || 'Tidak dipilih';
+
+    const message = `*FORM PENGAJUAN JASA EO*\n\n` +
+                   `*DATA PEMESAN*\n` +
+                   `Nama: ${document.getElementById('fullName').value || '-'}\n` +
+                   `Komunitas: ${document.getElementById('communityName').value || '-'}\n` +
+                   `WhatsApp: ${document.getElementById('whatsappNumber').value || '-'}\n\n` +
+                   `*DETAIL EVENT*\n` +
+                   `Game: ${gameName}\n` +
+                   `Tanggal: ${document.getElementById('eventDate').value || '-'}\n` +
+                   `Durasi: ${document.getElementById('eventDuration').value || '0'} hari\n\n` +
+                   `*LAYANAN DIPILIH*\n${serviceDetails}\n` +
+                   `*TOTAL PEMBAYARAN*\n` +
+                   `Rp ${totalAmount.toLocaleString('id-ID')}\n\n` +
+                   `*METODE PEMBAYARAN*\n` +
+                   `${paymentName}\n\n` +
+                   `Saya menyetujui syarat & ketentuan yang berlaku.`;
+
+    // 5. Buka WhatsApp
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/${adminNumber}?text=${encodedMessage}`, '_blank');
+    
     return true;
 }
 
